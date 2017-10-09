@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  	<title><%= title %></title>
+    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+	<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+    	body {
+  			background: #e9e9e9;
+  			color: #666666;
+  			font-family: 'RobotoDraft', 'Roboto', sans-serif;
+  			font-size: 20px;
+  			-webkit-font-smoothing: antialiased;
+  			-moz-osx-font-smoothing: grayscale;
+  			position: absolute;
+  			width:100%;
+        	margin-left:auto;
+        	margin-right:auto;
+  		}
+  		#caption {
+			display: inline-block;
+			position: absolute; 
+			top: 60px; 
+			left: 820px;
+			color: white;
+		}
+		#bg-image {
+  			background-image: url(https://abs.twimg.com/a/1458881967/img/t1/lohp_streams_header_bg_v4.png);
+			height:200px;
+		}
+		#logo {
+			top: 30px; 
+			left: 100px;
+			width:200px;
+			height:200px;
+		}
+		#reg_id {
+			display: block;
+			position: absolute;
+			left: 820px;
+		}
+		input {
+		    width: 200px;
+			height:	30px;
+			position: absolute;
+			left: 20px;
+			border-radius: 7px;
+		}
+		#reg_button {
+			width: 100px;
+			height: 30px;
+			left: 65px;
+			position: relative;
+			border-radius: 10px;
+			font-weight: bold;
+		}
+		#forgot_pw {
+			left: 21px;
+			position: relative;
+		}
+		#login{
+			width: 100px;
+			height: 40px;
+			display: inline-block;
+			position: absolute; 
+			top: 75px; 
+			left: 1700px;
+			background: transparent;
+			color: white;
+			border-radius: 10px;
+		}
+}	</style>
+  </head>
+  <body>
+  	<!-- Page banner -->
+   	<div id="bg-image">
+   		<a href="/"><img src="/images/twitter_image.png" alt="Twitter logo" id="logo"></a> 
+  		<div id="caption">
+    		<h2>Home Screen!</h2>
+    		<h1>Login Successful!</h1>
+    	</div>
+    	<button id="login" class="login" onclick="window.location='/login'">Log In</button>
+	</div>
+</html>

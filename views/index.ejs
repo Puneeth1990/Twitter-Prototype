@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<title><%= title %></title>
+<style>
+#logo{
+width: 300px;
+height: 300px;
+disaply: inline-block;
+}
+#login{
+width: 100px;
+height: 40px;
+display: inline-block;
+position: absolute; 
+top: 75px; 
+left: 1700px;
+background: transparent;
+color: white;
+border-radius: 10px;
+}
+#signup{
+width: 100px;
+height: 40px;
+display: inline-block;
+position: absolute; 
+top: 75px; 
+left: 1550px;
+background: transparent;
+color: white;
+border-radius: 10px;
+}
+#caption{
+display: inline-block;
+position: absolute; 
+top: 90px; 
+left: 700px;
+color: white;
+}
+#bg-image {
+  background-image: url(https://abs.twimg.com/a/1458881967/img/t1/lohp_streams_header_bg_v4.png);
+}
+</style>
+</head>
+  <body style='margin:50px'>
+   
+  <div id="bg-image">
+  	<img src="/images/twitter_image.png" alt="Twitter logo" id="logo"> 
+  	<div id="caption">
+    	<h2>See what&#39s happening right now.</h2>
+    	<p>Find community, conversation and inspiration about the things you love.</p>
+    </div>
+  	<button id="login" class="login" onclick="window.location='/login'">Log In</button>
+  	<button id="signup" class="Signup" onclick="window.location='/register'">Sign Up</button>
+  </div>
+  
+  </body>
+</html>

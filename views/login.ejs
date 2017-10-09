@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title><%= title %></title>
+    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+	<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+    	body {
+  			background: #e9e9e9;
+  			color: #666666;
+  			font-family: 'RobotoDraft', 'Roboto', sans-serif;
+  			font-size: 20px;
+  			-webkit-font-smoothing: antialiased;
+  			-moz-osx-font-smoothing: grayscale;
+  			position: absolute;
+  			width:100%;
+        	margin-left:auto;
+        	margin-right:auto;
+  			}
+  		#caption{
+			display: inline-block;
+			position: absolute; 
+			top: 90px; 
+			left: 850px;
+			color: white;
+		}
+		#bg-image {
+  			background-image: url(https://abs.twimg.com/a/1458881967/img/t1/lohp_streams_header_bg_v4.png);
+		}
+		#logo{
+			position: relative;
+			top: 30px; 
+			left: 100px;
+			width:200px;
+			height:200px;
+		}
+		#register{
+			width: 100px;
+			height: 40px;
+			display: inline-block;
+			position: absolute; 
+			top: 75px; 
+			left: 1700px;
+			background: transparent;
+			color: white;
+			border-radius: 10px;
+		}
+}	</style>
+  </head>
+  
+  <body>
+   	<div id="bg-image">
+   	<a href="/"><img src="/images/twitter_image.png" alt="Twitter logo" id="logo"></a> 
+  	<div id="caption">
+    	<h2>Welcome back..!</h2>
+    </div>
+    <button id="register" class="register" onclick="window.location='/register'">Register</button>
+	
+	<!-- Form Module-->
+	<div class="module form-module">
+		<div class="toggle" title="Signup..?!" onclick="window.location='/register'"><i class="fa fa-lg fa-pencil"></i>
+  	</div>
+  	<div class="form">
+    	<h2>Login to your account</h2>
+    	<form action="/home" method="post">
+      		<input type="text" placeholder="Username" name="userName"/>
+      		<input type="password" placeholder="Password" name="passWord"/>
+      		<button>Login</button>
+    	</form>
+  	</div>
+  		<div class="cta"><a href="#">Forgot your password?</a></div>
+	</div>
+    	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+		<script src="js/index.js"></script>
+ 
+    </body>
+    
+</html>
