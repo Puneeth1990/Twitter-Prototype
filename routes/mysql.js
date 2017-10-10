@@ -6,14 +6,14 @@ function getConnection(){
 	var connection = mysql.createConnection({
 	    host     : 'localhost',
 	    user     : 'root',
-	    password : 'Abhi*123#',
-	    database : 'test',
+	    password : 'Puneeth1990*',
+	    database : 'twitter',
 	    port	 : 3306
 	});
 	return connection;
 }
 
-
+// fetchData -- call back to fetch/insert the data from/to the DB
 function fetchData(callback,sqlQuery){
 	
 	console.log("\nSQL Query::"+sqlQuery);

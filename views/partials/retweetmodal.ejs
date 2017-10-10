@@ -1,0 +1,22 @@
+<div id="tweetModal" class="modal">
+	<!-- Modal content -->
+	<div class="modal-content">
+
+		<div class="tweet_area">
+			<span class="close">x</span>
+			<div class="tweet_area_pic">
+				<a href="#"><img alt="profile_pic" src="/images/default.png"
+					height="60px" width="60px" style="border-radius: 4px"></a>
+			</div>
+			<div ng-controller="tweetFormCtrl">
+				<form class="tweet_area_form">
+					<textarea class="tweet_area_textarea"
+						ng-model="tweetFormData.tweetMsg" placeholder="What's happening?"></textarea>
+					<br>
+					<button type="submit" class="tweet_area_button"
+						ng-click="tweetSub()">Tweet</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

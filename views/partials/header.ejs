@@ -1,0 +1,102 @@
+<!-- navbar -->
+	<nav class="navbar navbar-default">
+		<!-- <div class="navbar-inner"> -->
+  		<div class="container-fluid">
+	   		<!-- Collect the nav links, forms, and other content for toggling -->
+    		<div class="collapse navbar-collapse">
+      			<ul class="nav navbar-nav">
+      				<li ><a href="/home" class="active navbar-custom">
+      				<span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
+        			<li ><a href="#" class="navbar-custom">
+        			<span class="glyphicon glyphicon-flash" aria-hidden="true"></span> Moments</a></li>
+        			<li><a href="#" class="navbar-custom">
+        			<span class="glyphicon glyphicon-bell" aria-hidden="true"></span> Notifications</a></li>
+        			<li><a href="#" class="navbar-custom">
+        			<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Messages</a></li>
+      			</ul>
+      			<div class="nav navbar-nav navbar-right">
+      				<form class="nav navbar-nav navbar-form" role="search">
+        				<div class="form-group">
+          					<input type="text" class="form-control" placeholder="Search">
+        				</div>
+        				<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+      				</form>
+      				<ul class="nav navbar-nav">
+      					<li class="dropdown">
+          					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img src="/images/default.png" class="nav-profile-img" alt="profile"></a>
+          					<ul class="dropdown-menu" role="menu">
+          						<li>
+          							<a href="/viewProf" class="profile-drop-down">
+          								<div style="font-size: 20px"><span><%= user_name %></span></div>
+          								<span>View profile</span>
+          							</a>
+          							<hr style="margin: 2px">
+          						</li>
+          						<li>
+          							<a href="/logout" class="profile-drop-down"><span>Logout</span></a>
+          						</li>
+          					</ul>
+        				</li>
+        				<li><a href="#" id="tweetBtn"><img src="/images/tweet-button.png" height="35px" width="140px" alt="tweet"></a>
+        					<!-- The Tweet Modal -->
+							<div id="tweetModal" class="modal">
+  								<!-- Modal content -->
+  								<div class="modal-content">
+    								
+    								<div class="tweet_area">
+										<span class="close">x</span>
+										<div class="tweet_area_pic">
+											<a href="#"><img alt="profile_pic" src="/images/default.png" height="60px" width="60px" style="border-radius: 4px"></a>
+										</div>
+										<div ng-controller="tweetFormCtrl">
+											<form class="tweet_area_form">
+												<textarea class="tweet_area_textarea" ng-model="tweetFormData.tweetMsg" placeholder="What's happening?"></textarea>
+												<br>
+												<button type="submit" class="tweet_area_button" ng-click="tweetSub()">Tweet</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+      				</ul>
+      			</div>
+      		</div><!-- /.navbar-collapse --> 
+  		</div><!-- /.container-fluid -->
+  		<script>
+			// Get the modal
+			var modal 	 = document.getElementsByClassName('modal')[0];
+						
+			console.log(modal);
+			// Get the button that opens the modaldiv
+			var btn = document.getElementById("tweetBtn");
+			
+			// Get the <span> element that closes the modal
+			var span    = document.getElementsByClassName("close")[0];
+						
+			// Get the tweet button element
+			var tweet = document.getElementsByClassName("tweet_area_button")[0];
+						
+			// When the user clicks the button, open the modal
+			btn.onclick = function() {
+    			modal.style.display = "block";
+			}
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
+				modal.style.display = "none";
+			}
+			
+			// When the user clicks on tweet button, close the modal
+			tweet.onclick = function() {
+				modal.style.display = "none";
+			}
+						
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+				if (event.target == modal) {
+        			modal.style.display = "none";
+    			}
+			}
+		</script>
+	</nav>

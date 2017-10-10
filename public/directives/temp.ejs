@@ -1,0 +1,41 @@
+<div class="tweets_display_div">
+	<div style="height: 70px">
+		<div class="tweets_display_area_pic">
+			<a href="/viewProf"><img alt="profile_pic" src="/images/default.png" height="60px" width="60px" style="border-radius: 4px"></a>
+		</div>
+		<div class="tweets_display_tweet_msg">
+			<p ng-show="twt.retweet == 1" style="text-align: left; padding: 0px; opacity: 0.5;">Retweeted by @{{ twt.retweeted_by }}</p>
+			<a href="{{ link }}" ng-click="openProfile()"><h4 style="margin: 0px; font-weight: bold; text-align: left">{{ twt.tweeted_by }}</h4></a>
+			<p style="text-align: left;">{{ twt.tweet_msg }}</p>
+		</div>
+	</div>
+	<div class="tweets_display_retweets">
+		<span style="bottom: 50px; float: left;">
+			<a href="#" ng-click="handldeReply()" style="padding: 50px;"><img alt="reply" style="opacity: 0.5;" src="/images/reply.svg" height="30px"></a>
+			<a class="retweetBtn" href="#" ng-click="handleretweet(twt)" style="padding: 50px;"><img alt="retweet" style="opacity: 0.5;" src="/images/retweet.svg" height="30px"></a>
+			<a href="#" ng-click="handldelike()" style="padding: 50px;"><img alt="like" style="opacity: 0.5;" src="/images/like.svg" height="30px"></a>
+		</span>
+	</div>
+	<!-- The Retweet Modal -->
+							<div id="retweetModal" class="modal">
+  								<!-- Modal content -->
+  								<div class="modal-content">
+    								
+    								<div class="retweet_area">
+										<span class="close" ng-click="close()">x</span>
+										<div class="retweet_area_pic">
+											<a href="#"><img alt="profile_pic" src="/images/default.png" height="60px" width="60px" style="border-radius: 4px"></a>
+										</div>
+										<div>
+											<form class="tweet_area_form">
+												<textarea class="retweet_area_comments" ng-model="twt.retweetComments" placeholder="Add comments.."></textarea>
+												<hr>
+												<a href="#"><h4 style="margin: 0px; font-weight: bold; text-align: left">{{ twt.tweeted_by }}</h4></a>
+												<textarea id="retweet_txt" class="retweet_area_textarea">{{ twt.tweet_msg }}</textarea>
+												<button type="submit" class="tweet_area_button" ng-click="retweetSub(twt)">Retweet</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+</div>

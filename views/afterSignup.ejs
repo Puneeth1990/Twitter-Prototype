@@ -4,7 +4,7 @@
   	<title><%= title %></title>
     <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
 	<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
     <style>
     	body {
   			background: #e9e9e9;
@@ -22,7 +22,7 @@
 			display: inline-block;
 			position: absolute; 
 			top: 60px; 
-			left: 820px;
+			left: 30%;
 			color: white;
 		}
 		#bg-image {
@@ -59,7 +59,7 @@
 			left: 21px;
 			position: relative;
 		}
-		#login{
+		#login {
 			width: 100px;
 			height: 40px;
 			display: inline-block;
@@ -70,15 +70,15 @@
 			color: white;
 			border-radius: 10px;
 		}
-}	</style>
+  </style>
   </head>
   <body>
   	<!-- Page banner -->
    	<div id="bg-image">
    		<a href="/"><img src="/images/twitter_image.png" alt="Twitter logo" id="logo"></a> 
   		<div id="caption">
-    		<h2>Registration successful!</h2>
-    		<h1>Please login now!</h1>
+    		<h2><%= statusMsg.message1 %></h2>
+    		<h1><%= statusMsg.message2 %></h1>
     	</div>
     	<button id="login" class="login" onclick="window.location='/login'">Log In</button>
 	</div>

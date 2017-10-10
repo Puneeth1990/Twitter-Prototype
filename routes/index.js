@@ -4,6 +4,7 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Twitter' });
+	// render the index page	
+	res.render('index', { title: 'Twitter' });
 };
 

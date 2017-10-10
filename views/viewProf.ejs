@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="tweetApp">
+<!-- head -->
+<head>
+	<% include ./partials/head %>
+</head>
+<!-- body -->
+<body>
+	<div class="container-fluid">
+		<header>
+        	<% include ./partials/header %>
+    	</header>
+		
+		<div class="container">
+			<!-- BANNER -->
+			<div class="prof-bg-banner">
+				<!-- PROFILE-PIC -->
+				<div class="prof-prof-pic-div">
+					<a href="#"><img alt="profile_pic" src="/images/default.png" class="prof-prof-pic-img"></a>
+					<div class="prof-prof-name-div">
+						<br>
+						<a ng-href="/viewProf"><h3 style="margin: 0px; font-weight: bold;"><%= user_name %></h3></a>
+						<small>@<%= user_ID %></small>
+						<br><br><br><br>
+						<span class="glyphicon glyphicon-calendar" aria-hidden="true"><h4 style="font-weight: bold;"> Joined <%=mnth %>/<%=year %></h4></span> 
+					</div>
+				</div>
+				<script type="text/javascript">user_ID="<%= user_ID %>"</script>
+				<div class="prof-tweet-cnt-row" ng-controller="cntCtrl">
+					<div class="left_tweets" ng-init="getFollowingCnt()">
+						<small>FOLLOWING</small>
+						<h2 style="color: #5599FF; margin: 0.0em">{{ followingCnt }}</h2>
+					</div>
+					<div class="center_following" ng-init="getFollowersCnt()">
+						<small>FOLLOWERS</small>
+						<h2 style="color: #5599FF; margin: 0.0em">{{ followersCnt }}</h2>
+					</div>
+					<div class="right_followers">
+						<small>LIKES</small>
+						<h2 style="color: #5599FF; margin: 0.0em">0</h2>
+					</div>
+				</div>
+				<div id="editProfContainer" ng-controller="editProfCtrl">
+					<button class="prof-edit-prof-btn" id="editProfBtn"><h4>Edit profile</h4></button>
+					<div id="editProfModal" class="modal">
+						<!-- Modal content -->
+						<div class="modal-content">
+							<div>
+								<span class="close">x</span>
+								<div class="tweet_area_pic">
+									<a href="#"><img alt="profile_pic"
+										src="/images/default.png" height="60px" width="60px"
+										style="border-radius: 4px"></a>
+								</div>
+								<div>
+									<form id="form_id" method="post">
+										<div ng-show="btnStatus == 'Save Changes'">
+											<input type="text" name="userName" ng-model="userName">
+											<br></br>
+											<input type="text" name="userID" placeholder="{{ userID }}" readonly>
+											<br></br>
+											<input type="password" name="passWord" placeholder="{{ passWord }}" readonly>
+											<br></br> 
+											<input type="email" name="emailId" ng-model="emailAddr"> 
+											<br></br> 
+											<input type="tel" name="phneNum" ng-model="phneNum">
+											<br></br>
+										</div>
+										<button ng-click=editProfSubmit()>{{ btnStatus }}</button>
+									</form>
+								</div>
+							</div>  
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- NEW-TWEET -->
+			<div class="prof-main">
+				<div class="tweet_area" ng-controller="tweetFormCtrl">
+					<div  ng-show="show">
+						<div class="tweet_area_pic">
+							<a href="#"><img alt="profile_pic" src="/images/default.png" height="60px" width="60px" style="border-radius: 4px"></a>
+						</div>
+						<div>
+							<form class="tweet_area_form">
+								<textarea class="tweet_area_textarea" ng-model="tweetFormData.tweetMsg" placeholder="What's happening?"></textarea>
+								<br>
+								<button type="submit" class="tweet_area_button" ng-click="tweetSub()">Tweet</button>
+							</form>
+						</div>
+					</div>
+					<div class="timeline" ng-controller="profTweetsShowCtrl" ng-init="showMyTweets()">
+						<div ng-repeat="twt in dataFromTweets">
+							<tweet-panel twt="twt" link="link"></tweet-panel>
+							<hr>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- TRENDS -->
+			<div class="prof-trend">
+				<h3>Current trends</h3>
+			</div>
+		</div>
+	</div>
+	<script>
+			// Get the modal
+			var profModal = document.getElementById('editProfModal');
+
+			// Get the button that opens the modal
+			var editProfBtn = document.getElementById("editProfBtn");
+
+			// Get the <span> element that closes the modal
+			var editProfClose = document.getElementsByClassName("close")[1];
+			
+			// When the user clicks the button, open the modal
+			editProfBtn.onclick = function() {
+    			profModal.style.display = "block";
+    			angular.element(document.getElementById('editProfContainer')).scope().getOldFormData();
+			}
+
+			// When the user clicks on <span> (x), close the modal
+			editProfClose.onclick = function() {
+				profModal.style.display = "none";
+			}
+			
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+    			if (event.target == profModal) {
+    				profModal.style.display = "none";
+    			}
+			}
+		</script>
+</body>

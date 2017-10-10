@@ -1,0 +1,12 @@
+<div class="who_to_follow_div">
+	<div class="tweets_display_area_pic">
+		<a href="/viewProf"><img alt="profile_pic" src="/images/default.png" height="60px" width="60px" style="border-radius: 4px"></a>
+	</div>
+	<div class="follow_username_div">
+		<a href="{{ link }}" ng-click="openProfile()"><h4 style="margin: 0px; font-weight: bold; display: inline;">{{ follow.user_name }}</h4></a>
+		<p style="display: inline;"> @{{ follow.user_ID }}</p>
+		<div>
+			<button ng-click="followBtn()" type="submit" style="height: 30px; width: 80px; margin-top: 6px; font-weight: bold;"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Follow</button>
+		</div>					
+	</div>
+</div>
