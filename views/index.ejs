@@ -1,52 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 <title><%= title %></title>
+
 <style>
-#logo{
-width: 300px;
-height: 300px;
-disaply: inline-block;
-}
-#login{
-width: 100px;
-height: 40px;
-display: inline-block;
-position: absolute; 
-top: 75px; 
-left: 1700px;
-background: transparent;
-color: white;
-border-radius: 10px;
-}
-#signup{
-width: 100px;
-height: 40px;
-display: inline-block;
-position: absolute; 
-top: 75px; 
-left: 1550px;
-background: transparent;
-color: white;
-border-radius: 10px;
-}
-#caption{
-display: inline-block;
-position: absolute; 
-top: 90px; 
-left: 700px;
-color: white;
-}
-#bg-image {
-  background-image: url(https://abs.twimg.com/a/1458881967/img/t1/lohp_streams_header_bg_v4.png);
-}
+  	
+	#logo
+	{
+		width: 300px;
+		height: 300px;
+		display: inline-block;
+	}
+
+	#login
+	{
+		width: 100px;
+		height: 40px;
+		display: inline-block;
+		position: absolute; 
+		top: 75px; 
+		right:140px;
+		background: transparent;
+		color: white;
+		border-radius: 10px;
+	}
+	
+	#signup
+	{
+		width: 100px;
+		height: 40px;
+		display: inline-block;
+		position: absolute; 
+		top: 75px;
+		right:260px; 
+		background: transparent;
+		color: white;
+		border-radius: 10px;
+	}
+
+	#caption
+	{
+		display: inline-block;
+		position: absolute; 
+		top: 90px; 
+		left: 700px;
+		margin-top:70px;
+		color: white;
+	}
+	
+	#bg-image 
+	{
+  		background-image: url(https://abs.twimg.com/a/1458881967/img/t1/lohp_streams_header_bg_v4.png);
+  		 -webkit-background-size: cover;
+  		-moz-background-size: cover;
+  		-o-background-size: cover;
+  		background-size: cover;
+	}
 </style>
+
 </head>
-  <body style='margin:50px'>
+
+<body>
    
   <div id="bg-image">
   	<img src="/images/twitter_image.png" alt="Twitter logo" id="logo"> 
@@ -58,5 +80,47 @@ color: white;
   	<button id="signup" class="Signup" onclick="window.location='/register'">Sign Up</button>
   </div>
   
-  </body>
+  <section id="workareas" class="bg-dark" style="height:150px;">
+        <div class="container">
+            <div class="row" >
+                <div class="col-sm" >
+                    <div id="workarea-carousel" class="owl-carousel1 owl-theme-workareas" style="padding-left:60px;">
+                    
+                    	<div class="workarea text-center" style="display:inline-block;width:100px;height:18.889;padding-top:40px;padding-bottom:20px;border-right-width:1.111px;border-right: solid 1px #E5E5E5;">
+                            <i class="fa fa-search" style="color:#72b4ec;"></i>
+                        </div>
+                        
+                        <div class="workarea text-center" style="display:inline-block;width:150px;height:18.889;padding-top:40px;padding-bottom:20px;border-right-width:1.111px;border-right: solid 1px #E5E5E5;">
+                            <a href="#" target="_blank" style="text-decoration:none; color:black;text-align:center;">Featured</a>
+                        </div>
+                        
+                        <div class="workarea text-center" style="display:inline-block;width:150px;height:18.889;padding-top:40px;padding-bottom:20px;border-right-width:1.111px;border-right: solid 1px #E5E5E5;">
+                            <a href="#" target="_blank" style="text-decoration:none; color:black;text-align:center;">News</a>
+                        </div>
+                        
+                        <div class="workarea text-center" style="display:inline-block;width:150px;height:18.889;padding-top:40px;padding-bottom:20px;border-right-width:1.111px;border-right: solid 1px #E5E5E5;">
+                            <a href="#" target="_blank" style="text-decoration:none; color:black;text-align:center;">Music</a>
+                        </div>
+                        
+                        <div class="workarea text-center" style="display:inline-block;width:200px;height:18.889;padding-top:40px;padding-bottom:20px;border-right-width:1.111px;border-right: solid 1px #E5E5E5;">
+                            <a href="#" target="_blank" style="text-decoration:none; color:black;text-align:center;">Entertainment</a>
+                        </div>
+                        
+                        <div class="workarea text-center" style="display:inline-block;width:160px;height:18.889;padding-top:40px;padding-bottom:20px;border-right-width:1.111px;border-right: solid 1px #E5E5E5;">
+                            <a href="#" target="_blank" style="text-decoration:none; color:black;text-align:center;">Lifestyle</a>
+                        </div>
+                        
+                         <div class="workarea text-center" style="display:inline-block;width:150px;height:18.889;padding-top:40px;padding-bottom:20px;">
+                            <a href="#" target="_blank" style="text-decoration:none; color:black;text-align:center;">More</a>
+                        </div>
+                     </div>
+                </div>
+            </div>
+       </div>
+  </section>
+
+  
+  
+  
+</body>
 </html>

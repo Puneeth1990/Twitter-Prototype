@@ -16,7 +16,7 @@ exports.register = function(req,res) {
 };
 
 exports.afterSignup = function(req,res) {
-	var insertSignupDetails = "insert into test.profiles values('"
+	var insertSignupDetails = "insert into twitter.twitterprototype values('"
 								+ req.param('userID')
 								+ "','" 
 								+ req.param('userName')
