@@ -4,7 +4,7 @@ var mysql = require('./mysql');
 exports.register = function(req,res) {
 	ejs.renderFile('./views/register.ejs',{ title: 'Twitter' },function(err, result) {
 		if (!err) {
-			console.log("In resister page")
+			console.log("In register page")
 			res.end(result);
 		}
 		// render or error
@@ -16,20 +16,12 @@ exports.register = function(req,res) {
 };
 
 exports.afterSignup = function(req,res) {
-	var insertSignupDetails = "insert into twitter.twitterprototype values('"
-								+ req.param('userID')
+	var insertSignupDetails = "insert into twitter.register values('"
+								+ req.param('fullName')
 								+ "','" 
-								+ req.param('userName')
-								+ "','" 
-								+ req.param('passWord')
+								+ req.param('password')
 								+ "','"
 								+ req.param('emailId') 
-								+ "','"
-								+ req.param('phneNum')
-								+ "',"
-								+ "MONTH(CURRENT_TIMESTAMP)"
-								+ ","
-								+ "YEAR(CURRENT_TIMESTAMP)"
 								+ ")";
 	mysql.fetchData(function(error,results) {
 		if(error) {

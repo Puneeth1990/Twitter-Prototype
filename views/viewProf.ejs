@@ -40,7 +40,7 @@
 						<h2 style="color: #5599FF; margin: 0.0em">0</h2>
 					</div>
 				</div>
-				<div id="editProfContainer" ng-controller="editProfCtrl">
+				<div id="editProfContainer" ng-controller="editProfileCtrl">
 					<button class="prof-edit-prof-btn" id="editProfBtn"><h4>Edit profile</h4></button>
 					<div id="editProfModal" class="modal">
 						<!-- Modal content -->
@@ -57,13 +57,11 @@
 										<div ng-show="btnStatus == 'Save Changes'">
 											<input type="text" name="userName" ng-model="userName">
 											<br></br>
-											<input type="text" name="userID" placeholder="{{ userID }}" readonly>
-											<br></br>
-											<input type="password" name="passWord" placeholder="{{ passWord }}" readonly>
+											<input type="password" name="password" placeholder="{{ password }}" readonly>
 											<br></br> 
-											<input type="email" name="emailId" ng-model="emailAddr"> 
+											<input type="email" name="emailId" ng-model="emailId"> 
 											<br></br> 
-											<input type="tel" name="phneNum" ng-model="phneNum">
+											<input type="tel" name="phoneNumber" ng-model="phoneNumber">
 											<br></br>
 										</div>
 										<button ng-click=editProfSubmit()>{{ btnStatus }}</button>

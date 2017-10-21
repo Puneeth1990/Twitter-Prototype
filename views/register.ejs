@@ -1,107 +1,137 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="tweetApp">
   <head>
   	<title><%= title %></title>
-    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
-	<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="app/bootstrap.js"></script>
+	<script src="app/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
+	
     <style>
-    	body {
-  			background: #e9e9e9;
-  			color: #666666;
-  			font-family: 'RobotoDraft', 'Roboto', sans-serif;
-  			font-size: 20px;
-  			-webkit-font-smoothing: antialiased;
-  			-moz-osx-font-smoothing: grayscale;
-  			position: absolute;
-  			width:100%;
-        	margin-left:auto;
-        	margin-right:auto;
-  		}
-  		#caption {
-			display: inline-block;
-			position: absolute; 
-			top: 90px; 
-			left: 820px;
-			color: white;
+
+		ul#dropdown-menu
+		{
+    		display:inline;
 		}
-		#bg-image {
-  			background-image: url(https://abs.twimg.com/a/1458881967/img/t1/lohp_streams_header_bg_v4.png);
-			height:200px;
+		
+		@media(max-width:768px)
+		{
+    		#login-dp
+    		{
+        		background-color: inherit;
+        		color: #fff;
+    		}
+    
+    		#login-dp .bottom
+    		{
+        		background-color: inherit;
+        		border-top:0 none;
+    		}	
 		}
-		#logo {
-			top: 30px; 
-			left: 100px;
-			width:200px;
-			height:200px;
+		
+		.navbar-default
+		{
+     		background-color:  rgba(126, 215, 202, 0.72);
 		}
-		#reg_id {
-			display: block;
-			position: absolute;
-			left: 820px;
-		}
-		input {
-		    width: 200px;
-			height:	30px;
-			position: absolute;
-			left: 20px;
-			border-radius: 7px;
-		}
-		#reg_button {
-			width: 100px;
-			height: 30px;
-			left: 65px;
-			position: relative;
-			border-radius: 10px;
-			font-weight: bold;
-		}
-		#alrdy_mem {
-			left: 36px;
-			position: relative;
-		}
-		#login{
-			width: 100px;
-			height: 40px;
-			display: inline-block;
-			position: absolute; 
-			top: 75px; 
-			left: 1700px;
-			background: transparent;
-			color: white;
-			border-radius: 10px;
-		}
-}	</style>
+		
+		
+    </style>
   </head>
   
-  <body>
-  	<!-- Page banner -->
-   	<div id="bg-image">
-   		<a href="/"><img src="/images/twitter_image.png" alt="Twitter logo" id="logo"></a> 
-  		<div id="caption">
-    		<h2>Sign up for Twitter!</h2>
-    	</div>
-    	<button id="login" class="login" onclick="window.location='/login'">Log In</button>
-	</div>
+  <body ng-controller="registerCtrl" ng-init="showRegisteredProfiles()>
+
+	<nav class="navbar navbar-default">
+  		<div class="container-fluid">
+    		<div class="navbar-header">
+      			<a class="navbar-brand" href="#" style="color:white;">Twitter</a>
+    		</div>
+    		<ul class="nav navbar-nav navbar-right">
+      			<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:white;">Language <span class="caret"></span></a>
+        			<ul class="dropdown-menu">
+          				<li><a href="#">English</a></li>
+          				<li><a href="#">Kannada</a></li>
+          				<li><a href="#">Hindi</a></li>
+        			</ul>
+      			</li>
+      			<li><p class="navbar-text" style="color:white;">Have an account?</p></li>
+        			<li class="dropdown">
+          				<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white;"><b>Login</b> <span class="caret"></span></a>
+						<ul id="login-dp" class="dropdown-menu" style="width: 351.979166px;height: 300.979166px;">
+							<li>
+					 			<div class="row">
+								 <form method="post" action="/afterSignup" id="form_id">
+								 		<h6 style="padding-left:30px;"> Have an account? </h6>
+								 		
+								 		<div class="form-group" ng-class="{ 'has-error' : loginForm.name.$invalid && !loginForm.name.$pristine }">
+                            				<div class="controls">
+                            					<input type="text" name="userId" class="form-control" ng-model="registerForm.name" ng-minlength="3" ng-maxlength="20" placeholder="Phone, email or username" ng-model="loginCredentials.userID" style="margin-left: 30px;width:250px;" required>
+                            				</div>
+                        				</div>
+										
+										<div class="form-group" ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
+                            				<div class="controls">
+                                				<input type="password" name="password" class="form-control" ng-model="loginForm.password" placeholder="Password (Required)" ng-model="loginCredentials.password" style="margin-left: 30px;width:250px;" required>
+                            				</div>
+                        				</div>
+                        				
+                        				<div> 
+                        					<input type="checkbox" style="margin-left:30px;"> <span> Remember me. <a href="/forgot"> Forgot password? </a> </span>
+                        				</div>
+  										<br>
+			                        	<button type="button" class="btn btn-primary" ng-click="submit()" style="margin-left: 30px;width:250px;">Log in</button>
+                        				
+                        				<h6 style="padding-left:30px;"> New to Twitter? </h6>
+                        				
+                        				<button type="button" class="btn btn-primary" ng-click="submit()" style="margin-left: 30px;width:250px;">Sign up</button>
+								 </form>
+								</div>
+    						</ul>
+  					</div>
+				</nav>
 	
-	<!-- Form Module-->
-	<div class="form" id="reg_id">
-    	<h2>Create an account</h2>
-    	<form id="form_id" action="/afterSignup" method="post">
-    		<input type="text" name="userName" placeholder="Username">
-      		<br></br>
-      		<input type="text" name="userID" placeholder="UserID">
-      		<br></br>
-      		<input type="password" name="passWord" placeholder="Password">
-      		<br></br>
-      		<input type="email" name="emailId" placeholder="Email Address">
-      		<br></br>
-      		<input type="tel" name="phneNum" placeholder="Phone Number">
-      		<br></br>
-      		<button id="reg_button">Register</button>
-    	</form>
-    	<div class="cta" id="alrdy_mem"><a href="/login">Already a member?</a></div>
-  	</div>
-	
+	<!--Register section-->
+    <section id="register" class="section">
+    	<div class="container">
+            <div class="row" style="padding-top:40px;">
+                <div class="col-sm-6 inner-right border-center" data-wow-delay=".3s" style="padding-right:160px;left:400px;">
+                    <h1> <b> Join Twitter Today. </b> </h1>
+                    <br>
+                    <form name="registerForm" id="registerForm" action="/afterSignup method="post" novalidate>
+                        <div class="form-group" ng-class="{ 'has-error' : registerForm.name.$invalid && !registerForm.name.$pristine }">
+                            <div class="controls">
+                            	<input type="text" name="fullName" class="form-control" ng-model="registerCredentials.fullName" ng-minlength="3" ng-maxlength="20" placeholder=" Full name (Required)" required>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group" ng-class="{ 'has-error' : registerForm.mail.$invalid && !registerForm.mail.$pristine }">
+                            <div class="controls">
+                                <input type="email" name="emailId" class="form-control" ng-model="registerCredentials.emailId" placeholder="Phone or Email (Required)" required>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group" ng-class="{ 'has-error' : registerForm.password.$invalid && !registerForm.password.$pristine }">
+                            <div class="controls">
+                                <input type="password" name="password" class="form-control" ng-model="registerCredentials.password" placeholder="Password (Required)" required>
+                            </div>
+                        </div>
+                        <br>
+                        <div> 
+                        	<input type="checkbox"> <span> Personalize Twitter based on where you've seen Twitter content on the web. <a href=""> Learn more. </a> </span>
+                        </div>
+                        <br>
+  						<button type="button" class="btn btn-primary"><a href="/afterSignup">Sign Up</a></button>
+  						<br>
+  						<br>
+  						<span> By signing up, you agree to the <a href="">Terms of Service </a> and <a href=""> Privacy Policy </a>, including <a href="">Cookie Use</a>. Others will be able to find you by email or phone number when provided.</span>
+            	</div>
+            </div>
+         </div>
+     </section>
+			
   </body>
     
 </html>

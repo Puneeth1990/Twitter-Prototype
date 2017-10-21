@@ -2,75 +2,93 @@
 <html lang="en" ng-app="tweetApp">
   <head>
   	<title><%= title %></title>
-    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
-	<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="app/bootstrap.js"></script>
+	<script src="app/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
+	
     <style>
-    	body {
-  			background: #e9e9e9;
-  			color: #666666;
-  			font-family: 'RobotoDraft', 'Roboto', sans-serif;
-  			font-size: 20px;
-  			-webkit-font-smoothing: antialiased;
-  			-moz-osx-font-smoothing: grayscale;
-  			position: absolute;
-  			width:100%;
-        	margin-left:auto;
-        	margin-right:auto;
-  			}
-  		#caption{
-			display: inline-block;
-			position: absolute; 
-			top: 90px; 
-			left: 850px;
-			color: white;
+    	body 
+    	{
+  			background: #ffffff;
+  		}
+  		
+  		.navbar-default
+		{
+     		background-color:  rgba(126, 215, 202, 0.72);
 		}
-		#bg-image {
-  			background-image: url(https://abs.twimg.com/a/1458881967/img/t1/lohp_streams_header_bg_v4.png);
-		}
-		#logo{
-			position: relative;
-			top: 30px; 
-			left: 100px;
-			width:200px;
-			height:200px;
-		}
-		#register{
-			width: 100px;
-			height: 40px;
-			display: inline-block;
-			position: absolute; 
-			top: 75px; 
-			left: 1700px;
-			background: transparent;
-			color: white;
-			border-radius: 10px;
-		}
-}	</style>
+  		
+  		
+  	</style>
   </head>
   
   <body>
-   	<div id="bg-image">
-   	<a href="/"><img src="/images/twitter_image.png" alt="Twitter logo" id="logo"></a> 
-  	<div id="caption">
-    	<h2>Welcome back..!</h2>
-    </div>
-    <button id="register" class="register" onclick="window.location='/register'">Register</button>
-	
+  	<!--Nav-->
+    <nav class="navbar navbar-default" id="nav_bar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" style="color:white;">Twitter</a>
+            </div>
+
+			<div>
+				<i class="fa fa-twitter" aria-hidden="true" style="color:blue;display:block;text-align:center;"></i>
+			</div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                	<li><a href="/" style="color:white;">Home</a></li>
+                    <li><a href="#about" style="color:white;">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--navbar ends here-->
+  	
 	<!-- Form Module-->
-	<div class="module form-module">
-		<div class="toggle" title="Signup..?!" onclick="window.location='/register'"><i class="fa fa-lg fa-pencil"></i>
-  	</div>
   	<div class="form" ng-controller="loginCtrl">
-    	<h2>Login to your account</h2>
-    	<form>
-      		<input type="text" placeholder="UserID" name="userID" ng-model="loginCredentials.userID"/>
-      		<input type="password" placeholder="Password" name="passWord" ng-model="loginCredentials.passWord"/>
-      		<button ng-click="submit()">Login</button>
-    	</form>
-  	</div>
-  		<div class="cta"><a href="/forgot">Forgot your password?</a></div>
-	</div>
+  		<section id="login" class="section">
+    		<div class="container">
+            	<div class="row" style="padding-top:40px;">
+                	<div class="col-sm-6 inner-right border-center" data-wow-delay=".3s" style="padding-right:160px;left:400px;">
+                		
+    					<h1> <b> Log in to Twitter </b> </h1>
+            	        <br>
+            	        <form name="loginForm" id="loginForm" method="post" novalidate>
+            	        	<div class="form-group" ng-class="{ 'has-error' : loginForm.name.$invalid && !loginForm.name.$pristine }">
+                            	<div class="controls">
+                            		<input type="text" name="emailId" class="form-control" ng-model="loginCredentials.emailId" ng-minlength="3" ng-maxlength="20" placeholder="Phone, email or username" required>
+                            	</div>
+                        	</div>
+                        	<br>
+                        	
+                        	<div class="form-group" ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
+                            	<div class="controls">
+                                	<input type="password" name="password" class="form-control" ng-model="loginCredentials.password" placeholder="Password (Required)" required>
+                            	</div>
+                        	</div>
+                        	<br>
+                        	
+                        	<div> 
+                        		<input type="checkbox"> <span> Remember me. <a href="/forgot"> Forgot password? </a> </span>
+                        	</div>
+                        	<br>
+  						
+                        	<button type="button" class="btn btn-primary" ng-click="submit()">Log in</button>
+                        	<br>
+                        	<br>
+                        	
+                        	<span> New to Twitter? <a href="/register">Sign up now</a></span>
+    					</form>
+    	
+    	
     	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 		<!-- minified AngularJS 1.3.0 -->
 		<script src="https://code.angularjs.org/1.3.0-rc.2/angular.min.js"></script>
@@ -80,6 +98,7 @@
 		<script src="https://code.angularjs.org/1.3.0-rc.2/angular-resource.min.js"></script>
 		<!-- my App -->
   		<script src="/controllers/controller.js"></script>
+    </body>
     </body>
     
 </html>

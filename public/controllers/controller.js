@@ -71,8 +71,10 @@ tweetApp.controller('retweetFormCtrl', ['$scope', '$http', function($scope, $htt
     }  
 }]);
 
+
+
 // Edit Profile Controller
-tweetApp.controller('editProfCtrl', ['$scope', '$http', function($scope, $http){
+tweetApp.controller('editProfileCtrl', ['$scope', '$http', function($scope, $http){
 	$scope.userName 	= "Username";
 	$scope.passWord 	= "Password";
 	$scope.emailAddr 	= "Email Address";
@@ -92,7 +94,7 @@ tweetApp.controller('editProfCtrl', ['$scope', '$http', function($scope, $http){
 	}
 	$scope.editProfSubmit = function(){
 		$http.post('/editProf', {"userName"  : $scope.userName,
-								 "passWord"  : $scope.passWord,
+								 "password"  : $scope.password,
 								 "emailAddr" : $scope.emailAddr,
 								 "phneNum"   : $scope.phneNum,
 								 "userID"	 : $scope.userID}).
