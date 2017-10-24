@@ -19,9 +19,10 @@ exports.afterSignup = function(req,res) {
 	var insertSignupDetails = "insert into twitter.register values('"
 								+ req.param('fullName')
 								+ "','" 
-								+ req.param('password')
+								+ req.param('emailId')
 								+ "','"
-								+ req.param('emailId') 
+								+ req.param('password') 
+								+"'"
 								+ ")";
 	mysql.fetchData(function(error,results) {
 		if(error) {

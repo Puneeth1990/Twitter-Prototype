@@ -9,7 +9,7 @@ exports.login = function(req,res) {
 		}
 		// render or error
 		else {
-			res.end('An error occurred');
+			res.end('An error occurred................');
 			console.log(err);
 		}
 	});
@@ -24,13 +24,13 @@ exports.logout = function(req,res) {
 			res.end(result);
 		}
 		else
-			res.end('An error occurred');
+			res.end('An error occurred .......aaaaaa');
 	});
 };
 
 exports.getFollowersCnt = function(req, res){
 	var urlParts = req.url.split("/");
-	var getFollowersCntQry = "SELECT COUNT(DISTINCT user_id) AS followerscnt from  twitter.tweetfollowers WHERE follower_ID='"+urlParts[2]+"'";
+	var getFollowersCntQry = "SELECT COUNT(DISTINCT user_id) AS followerscnt from  test.follow_followers WHERE follower_ID='"+urlParts[2]+"'";
 	mysql.fetchData(function(error, results) {
 		if(error) throw error;
 		else {
@@ -42,7 +42,7 @@ exports.getFollowersCnt = function(req, res){
 
 exports.getFollowingCnt = function(req, res){
 	var urlParts = req.url.split("/");
-	var getFollowingCntQry = "SELECT COUNT(DISTINCT follower_id) AS followingcnt from  twitter.tweetfollowers WHERE user_ID='"+urlParts[2]+"'";
+	var getFollowingCntQry = "SELECT COUNT(DISTINCT follower_id) AS followingcnt from  test.follow_followers WHERE user_ID='"+urlParts[2]+"'";
 	mysql.fetchData(function(error, results) {
 		if(error) throw error;
 		else { 
@@ -54,7 +54,7 @@ exports.getFollowingCnt = function(req, res){
 
 exports.getTweetsCnt = function(req, res){
 	var urlParts = req.url.split("/");
-	var gettweetCntQry = "SELECT COUNT(tweet_msg) AS tweetscnt from  twitter.tweet WHERE tweeted_by='"+urlParts[2]+"'";
+	var gettweetCntQry = "SELECT COUNT(tweet_msg) AS tweetscnt from  test.tweet WHERE tweeted_by='"+urlParts[2]+"'";
 	mysql.fetchData(function(error, results) {
 		if(error) throw error;
 		else { 
@@ -67,16 +67,17 @@ exports.getTweetsCnt = function(req, res){
 // this is required to disable browser caching; this makes browser not pick a webpage
 // from its cache after user is logged out
 exports.authenticate = function(req, res){
-	var selectLoginDetails ="select * from twitter.login where emailId='"+req.param('emailId')+"' and password='"+req.param('password')+"'";
+	var selectLoginDetails ="select * from twitter.register where emailId='"+req.param('emailId')+"' and password='"+req.param('password')+"'";
 	var authenticateResults;
 	mysql.fetchData(function(error, results) {
+		console.log(results+"Hi");
 		if(error)
 			throw error;
 		else {
 			// handle login fail - 2 characters '[', ']'
 			if(JSON.stringify(results).length > 2){
-				// initialize a session
-				req.session.userID = req.param('emailId');
+				// initialize a session	
+				req.session.emailId = req.param('emailId');
 				// update the result JSON
 				authenticateResults = {"status" : "SUCCESS", "emailId" : results[0]["emailId"]};
 				// send the JSON response
@@ -87,7 +88,6 @@ exports.authenticate = function(req, res){
 				authenticateResults = {"status" : "FAIL", "emailId" : req.param('emailId')};
 				// send the JSON response
 				res.send(authenticateResults);
-				console.log(authenticateResults);
 				res.end();
 			}
 		}
@@ -107,20 +107,22 @@ exports.loginFail = function(req, res) {
 // this function is called after login details are authenticated
 // and caching is not enabled on this page; every time reloads from server not from browser cache
 exports.returnLogin = function(req,res) {	
-	if(req.session.userID)
+	if(req.session.emailId)
 	{
-		var selectLoginDetails ="select * from twitter.login where emailId='"+req.session.emailId+"'";
+		var selectLoginDetails ="select * from twitter.register where emailId='"+req.session.emailId+"'";
 		// set no-caching on this file, when user is logged-in
 		res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
 		mysql.fetchData(function(error, results) {
 			if(error)
 				throw error;
 			else {
-				ejs.renderFile('./views/loginNew.ejs', { title: 'Twitter', emailId: results[0]["emailId"], emailI: results[0].emailId}, function(err, result) {
+				console.log("results[0]");
+				console.log(results[0]);
+				ejs.renderFile('./views/loginNew.ejs', { title: 'Twitter', user_ID: results[0].fullName, user_name: results[0].fullName}, function(err, result) {
 					if (!err)
 						res.end(result);
 					else
-						res.end('An error occurred');
+						res.end('An error occurred..............bbbbb');
 				});
 			}
 		}, selectLoginDetails);
@@ -134,13 +136,13 @@ exports.forgot = function(req,res) {
 		if (!err)
 			res.end(result);
 		else
-			res.end('An error occurred');
+			res.end('An error occurred,,,,,,');
 	});
 };
 
 // FIXME: AG: Extend forgot pw functionality
 exports.afterForgot = function(req, res){
-	var selectLoginDetails ="select * from twitter.login where emailId='"+req.param('emailId')+"'";
+	var selectLoginDetails ="select * from twitter.register where emailId='"+req.param('emailId')+"'";
 	
 	mysql.fetchData(function(error,results) {
 		if(error)
@@ -157,7 +159,7 @@ exports.afterForgot = function(req, res){
 					}
 					// render or error
 					else {
-						res.end('An error occurred');
+						res.end('An error occurred.............vvvvvvv');
 						console.log(err);
 					}
 				});
@@ -169,7 +171,7 @@ exports.afterForgot = function(req, res){
 					}
 					// render or error
 					else {
-						res.end('An error occurred');
+						res.end('An error occurred..............ffffffffff');
 						console.log(err);
 					}
 				});
@@ -188,11 +190,11 @@ exports.viewProf = function(req,res) {
 	var getMyTweetsQry = "";
 	
 	if(urlParts.length == 2) {
-		getUserProfile = "select * from twitter.login where emailId='"+req.session.emailId+"'";
+		getUserProfile = "select * from twitter.register where emailId='"+req.session.emailId+"'";
 		getMyTweetsQry = "select * from twitter.tweet where tweeted_by='"+req.session.userID+"' order by tweet_id desc limit 10";
 	}
 	else {
-		getUserProfile = "select * from twitter.twitterprototype where user_ID='"+urlParts[2]+"'";
+		getUserProfile = "select * from twitter.register where emailId='"+urlParts[2]+"'";
 		getMyTweetsQry = "select * from twitter.tweet where tweeted_by='"+urlParts[2]+"' order by tweet_id desc limit 10";
 	}
 	
@@ -204,8 +206,10 @@ exports.viewProf = function(req,res) {
 		else {
 			profileResults = results;
 			ejs.renderFile('./views/viewProf.ejs', { title: 'Twitter',
-				 userName: profileResults[0]["userName"],
-				 emailId: profileResults[0].emailId},
+				 user_name: profileResults[0]["user_name"],
+				 user_ID: profileResults[0].user_ID,
+				 mnth: monthNames[profileResults[0].mnth-1],
+				 year: profileResults[0].year},
 				 function(err, result) {
 					 // render on success
 					 if (!err) {
@@ -214,7 +218,7 @@ exports.viewProf = function(req,res) {
 					 }
 					 // render or error
 					 else {
-						 res.end('An error occurred');
+						 res.end('An error occurred............ggggggggggg');
 						 console.log(err);
 					 }
 				 });
@@ -242,7 +246,7 @@ exports.handleTweetForm = function(req,res){
 				}
 				// render or error
 				else {
-					res.end('An error occurred');
+					res.end('An error occurred............hhhhhhhhhh');
 					console.log(err);
 				}
 			});
@@ -275,7 +279,7 @@ exports.postRetweet = function(req, res){
 				}
 				// render or error
 				else {
-					res.end('An error occurred');
+					res.end('An error occurred.............ppppppppp');
 					console.log(err);
 				}
 			});
@@ -304,8 +308,8 @@ exports.getTweets = function(req, res){
 };
 
 exports.getFollowSuggestions = function(req, res){
-	var getFollowQry = "SELECT * FROM twitter.twitterprototype WHERE twitterprototype.user_id !='"+ req.session.userID +"' AND twitterprototype.user_ID NOT IN " +
-						"((SELECT tweetfollowers.follower_id FROM twitter.tweetfollowers WHERE tweetfollowers.user_id = '" 
+	var getFollowQry = "SELECT * FROM test.profiles WHERE profiles.user_id !='"+ req.session.userID +"' AND profiles.user_ID NOT IN " +
+						"((SELECT follow_followers.follower_id FROM test.follow_followers WHERE follow_followers.user_id = '" 
 						+ req.session.userID 
 						+"')" 
 						 
@@ -338,7 +342,7 @@ exports.postFollow = function(req, res){
 };
 
 exports.getUserDetails = function(req, res){
-	var getUserDetailsQry = "SELECT fullName, emailId, phoneNumber FROM twitter.register WHERE userName = '"+req.session.userName+"';"
+	var getUserDetailsQry = "SELECT user_name, email_id, phone_num FROM test.profiles WHERE user_ID = '"+req.session.userID+"';"
 	mysql.fetchData(function(error, results) {
 		if(error) throw error;
 		else {
@@ -354,7 +358,7 @@ exports.getUserDetails = function(req, res){
 exports.editProf = function(req, res){
 	var editProfQry = "UPDATE twitter.twitterprototype SET "
 					  + "user_name = '"
-					  + req.param('userName')
+					  + req.param('fullName')
 					  + "', email_id = '"
 					  + req.param('emailId')
 					  + "', phone_num = '"

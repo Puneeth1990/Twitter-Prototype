@@ -12,18 +12,18 @@ tweetApp.controller('loginCtrl', ['$scope', '$http', '$window', function($scope,
 	var authenticateStatus = "NOT_OK";
 	$scope.loginCredentials = "";
 	$scope.submit = function(){
-		console.log("Entered Finally");
 		$http.post('/authenticate', $scope.loginCredentials).
 		then(function(response){
 			if(response.data.status == "SUCCESS") {
 				$window.location.assign('/home');
+				console.log("Entered homeeeeeeeeeeeeeeeeeeeeee");
 			} else if(response.data.status == "FAIL"){
 				$window.location.assign('/loginFail');
 			} else {
 				console.log("Authentication Error!");
 			}
 		}, function(response){
-			console.log("Error while authenticating!")
+			console.log("Error while authenticating!");
 		});
 	}
 }]);
@@ -74,7 +74,7 @@ tweetApp.controller('retweetFormCtrl', ['$scope', '$http', function($scope, $htt
 
 
 // Edit Profile Controller
-tweetApp.controller('editProfileCtrl', ['$scope', '$http', function($scope, $http){
+tweetApp.controller('editProfCtrl', ['$scope', '$http', function($scope, $http){
 	$scope.userName 	= "Username";
 	$scope.passWord 	= "Password";
 	$scope.emailAddr 	= "Email Address";
@@ -94,7 +94,7 @@ tweetApp.controller('editProfileCtrl', ['$scope', '$http', function($scope, $htt
 	}
 	$scope.editProfSubmit = function(){
 		$http.post('/editProf', {"userName"  : $scope.userName,
-								 "password"  : $scope.password,
+								 "passWord"  : $scope.passWord,
 								 "emailAddr" : $scope.emailAddr,
 								 "phneNum"   : $scope.phneNum,
 								 "userID"	 : $scope.userID}).

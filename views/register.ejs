@@ -42,7 +42,7 @@
     </style>
   </head>
   
-  <body ng-controller="registerCtrl" ng-init="showRegisteredProfiles()>
+  <body>
 
 	<nav class="navbar navbar-default">
   		<div class="container-fluid">
@@ -63,7 +63,7 @@
 						<ul id="login-dp" class="dropdown-menu" style="width: 351.979166px;height: 300.979166px;">
 							<li>
 					 			<div class="row">
-								 <form method="post" action="/afterSignup" id="form_id">
+								 <form method="post" action="/viewProf">
 								 		<h6 style="padding-left:30px;"> Have an account? </h6>
 								 		
 								 		<div class="form-group" ng-class="{ 'has-error' : loginForm.name.$invalid && !loginForm.name.$pristine }">
@@ -82,32 +82,32 @@
                         					<input type="checkbox" style="margin-left:30px;"> <span> Remember me. <a href="/forgot"> Forgot password? </a> </span>
                         				</div>
   										<br>
-			                        	<button type="button" class="btn btn-primary" ng-click="submit()" style="margin-left: 30px;width:250px;">Log in</button>
+			                        	<button type="button" class="btn btn-primary" onclick="window.location = '/viewProf';"style="margin-left: 30px;width:250px;">Log in</button>
                         				
                         				<h6 style="padding-left:30px;"> New to Twitter? </h6>
                         				
-                        				<button type="button" class="btn btn-primary" ng-click="submit()" style="margin-left: 30px;width:250px;">Sign up</button>
+                        				<button type="button" class="btn btn-primary" style="margin-left: 30px;width:250px;">Sign up</button>
 								 </form>
 								</div>
     						</ul>
   					</div>
-				</nav>
+				</nav> 
 	
-	<!--Register section-->
+   <!--Register section-->
     <section id="register" class="section">
     	<div class="container">
             <div class="row" style="padding-top:40px;">
                 <div class="col-sm-6 inner-right border-center" data-wow-delay=".3s" style="padding-right:160px;left:400px;">
                     <h1> <b> Join Twitter Today. </b> </h1>
                     <br>
-                    <form name="registerForm" id="registerForm" action="/afterSignup method="post" novalidate>
-                        <div class="form-group" ng-class="{ 'has-error' : registerForm.name.$invalid && !registerForm.name.$pristine }">
+                    <form name="registerForm" id="form_id" action="/afterSignup" method="post" novalidate>
+                        <div class="form-group" ng-class="{ 'has-error' : registerForm.fullName.$invalid && !registerForm.fullName.$pristine }">
                             <div class="controls">
                             	<input type="text" name="fullName" class="form-control" ng-model="registerCredentials.fullName" ng-minlength="3" ng-maxlength="20" placeholder=" Full name (Required)" required>
                             </div>
                         </div>
                         <br>
-                        <div class="form-group" ng-class="{ 'has-error' : registerForm.mail.$invalid && !registerForm.mail.$pristine }">
+                        <div class="form-group" ng-class="{ 'has-error' : registerForm.email.$invalid && !registerForm.email.$pristine }">
                             <div class="controls">
                                 <input type="email" name="emailId" class="form-control" ng-model="registerCredentials.emailId" placeholder="Phone or Email (Required)" required>
                             </div>
@@ -123,10 +123,11 @@
                         	<input type="checkbox"> <span> Personalize Twitter based on where you've seen Twitter content on the web. <a href=""> Learn more. </a> </span>
                         </div>
                         <br>
-  						<button type="button" class="btn btn-primary"><a href="/afterSignup">Sign Up</a></button>
+  						<button id="button" class="btn btn-primary">Sign Up</button>
   						<br>
   						<br>
   						<span> By signing up, you agree to the <a href="">Terms of Service </a> and <a href=""> Privacy Policy </a>, including <a href="">Cookie Use</a>. Others will be able to find you by email or phone number when provided.</span>
+            	    </form>
             	</div>
             </div>
          </div>
