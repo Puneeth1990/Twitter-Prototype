@@ -140,6 +140,8 @@ tweetApp.controller('followCtrl', ['$scope', '$http', function($scope, $http){
 	};
 }]);
 
+
+
 // tweetPanel directive
 tweetApp.directive('tweetPanel', function($http){
   return {
@@ -234,6 +236,8 @@ tweetApp.controller('cntCtrl', ['$scope', '$http', function($scope, $http){
 		var followersUrl = '/getFollowersCnt/'+$scope.user_ID;
 		$http.get(followersUrl).
 		then(function(response){
+			console.log(response);
+			console.log("aaaaaaaa");
 			$scope.followersCnt = response.data[0]["followerscnt"];
 		});
 	};

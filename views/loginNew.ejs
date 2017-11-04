@@ -1,59 +1,662 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="tweetApp">
+
 <!-- head -->
 <head>
 	<% include ./partials/head %>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
+	<!-- Material icons CSS toolkit -->
+	<link rel="stylesheet" href="css/material-icons.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="app/bootstrap.js"></script>
+	<script src="app/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	
+	 <style>
+    
+    	body 
+    	{
+  			background-color: rgb(230, 236, 240);
+  		}
+  		
+  		.navbar-default
+		{
+     		background-color:  #ffffff;
+		}
+		
+		.search-input 
+		{
+    		background-color: #f5f8fa;
+    		border-radius: 21px;
+    		border: 1px solid #e6ecf0;
+    		-moz-box-sizing: border-box;
+    		box-sizing: border-box;
+    		color: #14171a;
+    		display: block;
+    		font-size: 12px;
+    		height: 32px;
+    		line-height: 16px;
+    		padding: 8px 32px 8px 12px;
+    		transition: all .2s ease-in-out;
+    		width: 100%;
+    	}
+    	
+    	.EdgeButton--primary, .EdgeButton--primary:focus 
+    	{
+    		background-color: #4AB3F4;
+    		border-color: transparent;
+		}
+		
+		.EdgeButton--primary 
+		{
+    		background-color: #1da1f2;
+    		border: 1px solid #1da1f2;
+    		color: #ffff;
+    	}
+    
+	    .EdgeButton, .EdgeButton:visited 
+	    {
+    		border-radius: 100px;
+    		box-shadow: none;
+    		cursor: pointer;
+    		font-size: 14px;
+    		font-weight: bold;
+    		line-height: 20px;
+    		padding: 6px 16px;
+    		position: relative;
+    		text-align: center;
+    		white-space: nowrap;
+    	}
+    	
+    	.profileHome
+		{
+    		background-color: white;
+    		width: 300px;
+    		border: 2px solid black;
+    		height:250px;
+		}
+		
+		 #tweet_cnt_row div 
+		 {
+  			display: inline;
+  			margin: 0 1em 0 1em;
+		 }
+		 
+		 #leftside
+		{ 
+			float: left; 
+		} 
+		
+		
+		.profile 
+		{
+  			text-align: center;
+  			position: absolute;
+  			left: 150px;
+  			top: 110px;
+  			width: 260px;
+  			height: 250px;
+  			border-radius: 6px;
+  			background: linear-gradient(180deg, #5599FF 50%, #ffffff 50%);
+		}
+		
+		.profile_pic 
+		{
+  			position: absolute;
+  			left: 10px;
+  			top: 80px;
+  			border-radius: 6px;
+  			border-color: white;
+  			border-style: solid;
+		}
+
+		.profile_name 
+		{
+  			text-align: left;
+  			position: absolute;
+  			left: 105px;
+ 			top: 130px;
+		}
+
+		.tweet_cnt_row
+		{
+  			position: absolute;
+  			left: 10px;
+  			top: 195px;
+  			right: 30px;
+  			text-align: center;
+		}
+
+		.left_tweets
+		{
+  			display: inline-block;	
+  			float: left;
+  			text-align: left;
+		}
+
+		.center_following
+		{
+	  		display: inline-block;	
+  			margin: 0 auto;
+  			text-align: left;
+		}
+				
+		.right_followers
+		{
+  			display: inline-block;	
+  			float: right;
+  			text-align: left;
+		}
+		
+		.main 
+		{
+  			text-align: center;
+  			background-color: #F8F8F8;
+  			position: absolute;
+  			left: 410px;
+  			top: 60px;
+  			width: 700px;
+  			height:980px;
+  			border-radius: 6px;
+		}
+
+		.tweet_area 
+		{
+  			background-color: #e6f7ff;
+  			overflow:auto;
+  			width:auto;
+  			margin:auto; 
+  			height:190px;
+		}
+
+		.retweet_area 
+		{
+  			background-color: #e6f7ff;
+  			overflow:auto;
+  			width:auto;
+  			margin:auto; 
+  			height:250px;
+  			width: 100%;
+		}
+		
+		.tweet_area_pic 
+		{
+  			position: absolute;
+  			left: 20px;
+  			top: 10px;
+  			width: 100px;
+  			height: 100px;
+  			border-radius: 6px;
+		}
+
+		.retweet_area_pic 
+		{
+  			position: absolute;
+  			left: 20px;
+  			top: 110px;
+  			width: 100px;
+  			height: 100px;
+  			border-radius: 6px;
+		}
+
+		.tweet_area_form 
+		{
+  			position: absolute;
+  			left: 110px;
+  			top: 10px;
+  			overflow: hidden;
+		}
+		
+		.tweet_area_textarea 
+		{
+			width: 580px;
+			height: 120px;
+			border-radius: 6px;
+			border: 3px thin #cccccc;
+			padding: 5px;
+			font-size: 18px;
+			resize: none;
+		}
+		
+		.retweet_area_textarea 
+		{
+			width: 580px;
+			height: 100px;
+			border-radius: 6px;
+			border: 3px thin #cccccc;
+			padding: 5px;
+			font-size: 18px;
+			resize: none;
+		}
+		
+		.retweet_area_comments 
+		{
+			width: 580px;
+			height: 50px;
+			border-radius: 6px;
+			border: 3px thin #cccccc;
+			padding: 5px;
+			font-size: 18px;
+			resize: none;
+		}
+		
+		.tweet_area_button 
+		{
+			background-color: #5599FF;
+			font-weight: bold;
+			color: #FFFFFF;
+			text-align: center;
+			font-size: 20px;
+			margin-right: 8px;
+			border-radius: 6px;
+			border-color: #FFFFFF;
+			float: right;
+			height: 45px;
+			width: 100px;
+		}
+
+		.timeline 
+		{
+  			position: absolute;
+  			left: 0px;
+  			top: 190px;
+  			overflow: hidden;
+		}
+		
+		.tweets_display_div
+		{
+ 			background-color: #F8F8F8;
+ 			width: 700px;
+ 			height: 100px;
+ 			padding: 10px;
+		}
+
+		.tweets_display_area_pic
+		{
+			position: absolute;
+			left: 20px;
+		}
+		
+		.tweets_display_tweet_msg
+		{
+			width: 580px;
+			height: 80px;
+			font-size: 18px;
+			float: left;
+			left: 100px;
+			position: absolute;
+		}
+
+		.tweets_display_retweets
+		{
+			width: 580px;
+			height: 20px;
+			float: none;
+			left: 200px;
+			top: 50px;
+		}
+
+		.trend 
+		{
+  			text-align: left;
+  			background-color: #F8F8F8;
+  			position: absolute;
+  			left: 200px;
+  			top: 370px;
+  			width: 350px;
+  			height: 550px;
+  			border-radius: 6px;
+  			padding: 0px 0px 0px 20px;
+		}
+
+		.follow 
+		{
+  			text-align: left;
+  			background-color: #ffffff;
+  			position: absolute;
+  			left: 1020px;
+  			top: 60px;
+  			width: 340px;
+  			height: 280px;
+  			border-radius: 6px;
+  			padding: 0px 0px 0px 20px;
+  			border: 1px solid #e6ecf0;
+		}
+
+		.copyrights
+		{
+			text-align: left;
+	 		background-color: #ffffff;
+  			position: absolute;
+  			left: 1020px;
+  			top: 370px;
+  			width: 340px;
+  			height: 180px;
+  			border: 1px solid #e6ecf0;
+		}
+		
+		.prof-bg-banner 
+		{
+  			text-align: center;
+  			position: absolute;
+  			left: 0px;
+  			top: 60px;
+  			width: 1873px;
+  			height: 250px;
+  			background: linear-gradient(180deg, #5599FF 70%, #F8F8F8 30%);
+ 	 		margin: 15px;
+  			margin-top: 0px;
+		}
+		
+		.prof-tweet-cnt-row
+		{
+  			position: absolute;
+  			left: 480px;
+  			top: 190px;
+  			right: 1000px;
+  			text-align: center;
+		}
+		
+		.prof-prof-pic-div
+		{
+  			position: absolute;
+  			left: 80px;
+  			top: 60px;
+  			border-radius: 10px;
+  			border-color: white;
+  			border-style: solid;
+  			border-width: 8px;
+  			height: 280px;
+  			width: 280px;
+  			padding: 0px;
+		}
+		
+		.prof-prof-pic-img
+		{
+  			border-style: solid;
+  			height: 272px;
+  			width: 264px;
+  			border-color: white;
+  			border-radius: 10px;
+		}
+		
+		.prof-edit-prof-btn
+		{
+  			position: absolute;
+  			right: 100px;
+  			top: 187px;
+  			border-style: solid;
+  			height: 50px;
+  			width: 100px;
+  			border-radius: 6px;
+  			padding: 0px;
+  			text-align: center;
+		}
+		
+		.prof-prof-name-div
+		{
+  			float: left;
+  			text-align: left;
+		}
+		
+		.prof-trend 
+		{
+  			text-align: left;
+  			background-color: #F8F8F8;
+  			position: absolute;
+  			right: 175px;
+  			top: 370px;
+  			width: 350px;
+  			height: 550px;
+  			border-radius: 6px;
+  			padding: 0px 0px 0px 20px;
+		}
+
+		.prof-main 
+		{
+  			text-align: center;
+  			background-color: #F8F8F8;
+  			position: absolute;
+  			left: 500px;
+  			top: 350px;
+  			width: 700px;
+  			height:100vh;
+  			border-radius: 6px;
+		}
+		
+		.who_to_follow_div
+		{
+ 			background-color: #F8F8F8;
+ 			width: 200px;
+ 			height: 100px;
+ 			padding: 10px;
+		}
+		
+		.follow_username_div
+		{
+			position: absolute;
+			left: 100px;
+		}
+		
+		.retweetBtn
+		{
+		
+		}
+		
+  	</style>
+  	
 </head>
 <!-- body -->
 <body>
 <div class="container-fluid">
+    <!--Nav-->
+    <nav class="navbar navbar-default" id="nav_bar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <ul class="nav navbar-nav">
+	                <li><a href="/home" class="active navbar-custom" style="padding-left:70px;"><span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 13px;"></span> <b> Home </b></a></li>
+                	<li><a href="#" class="navbar-custom"><span class="glyphicon glyphicon-flash" aria-hidden="true" style="font-size: 13px;"></span> <b>Moments</b></a></li>
+                	<li><a href="#" class="navbar-custom"><span class="glyphicon glyphicon-bell" aria-hidden="true" style="font-size: 13px;"></span> <b>Notifications</b></a></li>
+                	<li><a href="#" class="navbar-custom"><span class="glyphicon glyphicon-envelope" aria-hidden="true" style="font-size: 13px;" data-toggle="modal" data-target="#directMessagesModal"></span><b> Messages</b></a></li>
+                </ul>
+            </div>
+
+			<div>
+				<i class="fa fa-twitter" aria-hidden="true" style="color:blue;padding-left:180px;width:10px;"></i>
+			</div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                		<li style="left:70px;"><input class="search-input" type="text" id="search-query" placeholder="Search Twitter" name="q" autocomplete="off" spellcheck="false" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-dropdown-1" style="width:240px;"></li>
+                    	<ul class="nav navbar-nav">
+                    		<li class="dropdown" style="bottom:15px;right:70px;"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="height:20px;"><img src="/images/default.png" class="nav-profile-img" alt="profile" style="height:40px;padding-left:150px;margin-left:0px;" title="Profile and Settings"></a> <span class="caret"></span></a>
+        						<ul class="dropdown-menu" style="top:64px;width:240px;">
+          							<li>
+										<a href="/viewProf" class="profile-drop-down">
+          									<div style="font-size: 18px"><h3 style="color:black;line-height:0%;"><b><%= user_name %></b></h3></div>
+          									<br>
+          									<small style="font-weight: bold;">@<%= user_ID %></small>
+          								</a>
+									</li>
+									<hr>
+          							<li><a href="/home" style="line-height: 200%;">Profile</a></li>
+          							<li><a href="#" style="line-height: 200%;">Lists</a></li>
+          							<li><a href="#"style="line-height: 200%;">Moments</a></li>
+          							<hr>
+          							<li><a href="#"style="line-height: 200%;">Twitter Ads</a></li>
+          							<li><a href="#"style="line-height: 200%;">Analytics</a></li>
+          							<hr>
+          							<li><a href="#"style="line-height: 200%;">Settings and privacy Ads</a></li>
+          							<li><a href="#"style="line-height: 200%;">Help center</a></li>
+          							<li><a href="#"style="line-height: 200%;">Keyboard shortcuts</a></li>
+          							<li><a href="/logout"style="line-height: 200%;">Log out</a></li>
+        						</ul>
+      						</li>
+        					<li style="right:110px;">
+        						<button id="global-new-tweet-button" ng-click="tweetSub()" class="js-global-new-tweet js-tooltip EdgeButton EdgeButton--primary js-dynamic-tooltip" data-placement="bottom" data-component-context="new_tweet_button" data-original-title="" data-toggle="modal" data-target="#myModal" style="margin-left:50px;">
+				            		<span class="text" style="color:white;">Tweet</span>
+        						</button>
+        					</li>
+        				</ul>
+            		</div>
+        		</div>
+    		</nav>
+    <!--navbar ends here-->
+      			
+      <!-- The Tweet Modal -->
+	  <div class="modal" id="myModal" role="dialog">
+    	<div class="modal-dialog">
+	      <!-- Modal content-->
+      		<div class="modal-content">
+        		<div class="modal-header">
+          			<button type="button" class="close" data-dismiss="modal">&times;</button>
+          			<h4 class="modal-title"><b>Compose new Tweet </b></h4>
+        		</div>
+        		<div class="modal-body">
+          			<textarea class="form-control" rows="5" id="comment" placeholder="What's happening?></textarea>
+        		</div>
+        		<div class="modal-footer">
+          			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        		</div>
+      		</div>
+    	</div>
+  	</div>
+  	
+  	
+  
+  							</div>
+  	
+  							<!-- The Tweet Modal -->
+							<div id="tweetModal" class="modal">
+  								<!-- Modal content -->
+  								<div class="modal-content">
+    								
+    								<div class="tweet_area">
+										<span class="close">x</span>
+										<div class="tweet_area_pic">
+											<a href="#"><img alt="profile_pic" src="/images/default.png" height="60px" width="60px" style="border-radius: 4px"></a>
+										</div>
+										<div ng-controller="tweetFormCtrl">
+											<form class="tweet_area_form">
+												<textarea class="tweet_area_textarea" ng-model="tweetFormData.tweetMsg" placeholder="What's happening?"></textarea>
+												<br>
+												<button id="button" ng-click="tweetSub()" class="button">
+				            						<span class="text" style="color:white;">Tweet</span>
+        										</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							</div>
+						</li>
+      				</ul>
+      			</div>
+      		</div><!-- /.navbar-collapse --> 
+  		</div><!-- /.container-fluid -->
+  		<script>
+			// Get the modal
+			var modal 	 = document.getElementsByClassName('modal')[0];
+						
+			console.log(modal);
+			// Get the button that opens the modaldiv
+			var btn = document.getElementById("tweetBtn");
+			
+			// Get the <span> element that closes the modal
+			var span    = document.getElementsByClassName("close")[0];
+						
+			// Get the tweet button element
+			var tweet = document.getElementsByClassName("tweet_area_button")[0];
+						
+			// When the user clicks the button, open the modal
+			btn.onclick = function() {
+    			modal.style.display = "block";
+			}
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
+				modal.style.display = "none";
+			}
+			
+			// When the user clicks on tweet button, close the modal
+			tweet.onclick = function() {
+				modal.style.display = "none";
+			}
+						
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+				if (event.target == modal) {
+        			modal.style.display = "none";
+    			}
+			}
+		</script>
+	</nav>
+	<div class="container-fluid">
 	<header>
         <% include ./partials/header %>
     </header>
 		
 	<div class="container">
 		<!-- profile div -->
-		<div id="profile" class="profile">
+		<div id="profile" class="profile" style="left:100px;top:80px;width:300px;">
 			<div class="profile_pic">
 				<img alt="profile_pic" src="/images/default.png" style="border-radius: 4px">
 			</div>
 			<div class="profile_name"> 
-				<a ng-href="/viewProf"><h3 style="margin: 0px; font-weight: bold;"><%= user_name %></h3></a>
-				<small>@<%= user_ID %></small>
+				<a ng-href="/viewProf"><h3 style="margin: 0px;color:black; font-weight: bold;font-size: 16px;"><%= user_name %></h3></a>
+				<a ng-href="/viewProf"><small style="font-weight: bold; color:black;">@<%= user_ID %></small>
 			</div>
 			<script type="text/javascript">user_ID="<%= user_ID %>"</script>
 			<div class="tweet_cnt_row" ng-controller="cntCtrl">
 				<div class="left_tweets" ng-init="getTweetsCnt()">
-					<small>TWEETS</small>
+					<small style="font-weight: bold;">TWEETS</small>
 					<h2 style="color: #5599FF; margin: 0.0em">{{ tweetsCnt }}</h2>
 				</div>
 				<div class="center_following" ng-init="getFollowingCnt()">
-					<small>FOLLOWING</small>
+					<small style="font-weight: bold;">FOLLOWING</small>
 					<h2 style="color: #5599FF; margin: 0.0em">{{ followingCnt }}</h2>
 				</div>
 				<div class="right_followers" ng-init="getFollowersCnt()">
-					<small>FOLLOWERS</small>
+					<small style="font-weight: bold;">FOLLOWERS</small>
 					<h2 style="color: #5599FF; margin: 0.0em">{{ followersCnt }}</h2>
 				</div>
 			</div>
 		</div>
 	
 		<!-- trending div -->
-		<div id="trend" class="trend">
-			<h3>Current trends</h3>
+		<div id="trend" class="trend" style="color:black;left:100px;top:340px;width:300px;">
+			<h4><b>Current trends.</b> <a href=""> <small> Change </small></a></h4>
 		</div>
 	
 		<!-- main div -->
-		<div id="main" class="main">
+		<div id="main" class="main" style="width:600px;top:80px;">
 			<div class="tweet_area">
 				<div class="tweet_area_pic">
-					<a href="#"><img alt="profile_pic" src="/images/default.png" height="60px" width="60px" style="border-radius: 4px"></a>
+					<a href="#"><img alt="profile_pic" src="/images/default.png" height="60px" width="60px" style="border-radius: 4px; margin-top:10px;"></a>
 				</div>
 				<div ng-controller="tweetFormCtrl">
 					<form class="tweet_area_form">
-						<textarea class="tweet_area_textarea" ng-model="tweetFormData.tweetMsg" placeholder="What's happening?"></textarea>
+						<textarea class="tweet_area_textarea" ng-model="tweetFormData.tweetMsg" placeholder="What's happening?" style="width:480px;color:#aab8c2;border:2px solid #b3e7ff;margin-top:10px;"></textarea>
 						<br>
-						<button type="submit" class="tweet_area_button" ng-click="tweetSub()">Tweet</button>
+						<div id="leftside">
+							<i class="fa fa-file-photo-o" style="font-size:35px;color:#b3e7ff" title="Add photos or video"></i>
+							<i class="material-icons" title="Add GIF"></i>
+							<i class="material-icons" style="font-size:35px;color:#b3e7ff" title="Add poll"></i>
+							<i class="material-icons" style="font-size:35px;color:#b3e7ff" title="Location search"></i>
+							<button id="global-new-tweet-button" class="js-global-new-tweet js-tooltip EdgeButton EdgeButton--primary js-dynamic-tooltip" rows="3" ng-click="tweetSub()" data-placement="bottom" data-component-context="new_tweet_button" data-original-title="" data-toggle="modal" data-target="#myModal" style="left:360px;bottom:10px;">
+				            	<span class="text" style="color:white;">Tweet</span>
+        					</button>
+        				</div>
 					</form>
 				</div>
 			</div>
@@ -66,16 +669,46 @@
 		</div>
 	
 		<!-- follow div -->
-		<div id="follow" class="follow" ng-controller="followCtrl" ng-init="showFollowSuggestions()">
-			<h3>Who to follow</h3>
+		<div id="follow" class="follow" ng-controller="followCtrl" ng-init="showFollowSuggestions()"  style="top:80px;">
+			<br>
+			<h4><b>Who to follow </b> <a href="">. Refresh . </a> <a href=""> View all </a> </h4>
 			<div ng-repeat="follow in followSuggestions">
 				<follow-panel follow="follow" link="link" show-follow-suggestions="showFollowSuggestions(followUser)"></follow-panel>
 			</div>
+			<div>
+				j
+				<br>
+				p
+				<br>
+				o
+				<br>
+				ll
+				<br>
+				k
+				<br>
+				j
+				<br>
+				n
+				<br>
+				l
+				
+			</div>
+			<hr>
+			<div>
+				<span style="padding-left:10px;"> <a href="">Find people you know</a></span>
+			</div>
+		</div>
+		
+		<div id="copyrights" class="copyrights" style="top:370px;">
+		<br>
+			<span style="padding-left:30px;color:grey;"> © 2017 Twitter &nbsp;<a href="" style="color:grey">About </a>&nbsp; <a href="" style="color:grey">Help Center</a>&nbsp; <a href="" style="color:grey">Terms</a>&nbsp; <a href="" style="color:grey;padding-left:30px;line-height:2px;">Privacy policy </a>&nbsp; <a href="" style="color:grey">Cookies</a>&nbsp; <a href="" style="color:grey">Ads info</a>&nbsp; <a href=""style="color:grey">Brand</a>&nbsp; <a href="" style="color:grey;padding-left:30px;">BlogStatus</a>&nbsp; <a href=""style="color:grey">Apps</a>&nbsp; <a href="" style="color:grey">Jobs</a>&nbsp;
+			 <a href="" style="color:grey">Marketing </a> &nbsp;<a href="" style="color:grey">Businesses  </a>&nbsp;<a href="" style="color:grey;padding-left:30px;">Developers</a> </span>
+			<hr>
+			<span style="padding-left:30px;"> <a href="">Advertise with Twitter </a></span>
 		</div>
 	
 	</div>
 		</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
 </body>
 </html>

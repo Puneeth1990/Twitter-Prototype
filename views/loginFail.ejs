@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="tweetApp">
 <head>
   	<title><%= title %></title>
     
@@ -20,15 +20,35 @@
   		
   		.navbar-default
 		{
-     		background-color:  rgba(126, 215, 202, 0.72);
+     		background-color: #ffffff;
+		}
+		
+		.alert-messages 
+		{
+    		width: 620px;
+    		height: 100px;
+    		border: 1px solid #e6ecf0;
+    		margin-left:420px;
 		}
   		
     </style>
+    
+    <script>
+    
+    	$(document).ready(function($) 
+    	{
+  			$('.close').click(function() 
+  			{
+    			$(this).closest('.alert-messages').hide();
+  			});
+		});
+		
+    </script>
   </head>
   <body>
   
   <!--Nav-->
-    <nav class="navbar navbar-default" id="nav_bar">
+     <nav class="navbar navbar-default" id="nav_bar">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
@@ -36,29 +56,85 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#" style="color:white;">Twitter</a>
+                 <div class="collapse navbar-collapse" id="myNavbar">
+                	<ul class="nav navbar-nav">
+                		<li style="color:#777;padding-left:280px;font-size: 16px;"><a href="/" style=""><b>Home</b></a></li>
+                    	<li style="color:#777;font-size: 16px;"><a href="#about" style=""><b>About</b></a></li>
+                	</ul>
+            </div>
             </div>
 
-			<div>
-				<i class="fa fa-twitter" aria-hidden="true" style="color:blue;display:block;text-align:center;"></i>
-			</div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                	<li><a href="/" style="color:white;">Home</a></li>
-                    <li><a href="#about" style="color:white;">About</a></li>
+      			<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" style="right:400px;font-size:18px;">Language <span class="caret"></span></a>
+        			<ul class="dropdown-menu">
+          				<li><a href="#">English</a></li>
+          				<li><a href="#">Kannada</a></li>
+          				<li><a href="#">Hindi</a></li>
+        			</ul>
+      			</li>
                 </ul>
             </div>
         </div>
     </nav>
     <!--navbar ends here-->
-  	
+    
+    <div class="alert-messages" style="padding-left:40px;padding-top:25px;top:80px;">
+    	The username and password you entered did not match our records. Please double-check and try again.
+    	<a id="close" href="#" class="close">X</a>
+    </div>
+    
   
-  	<!-- Page banner -->
-  		<div id="caption">
-    		<h1>Either password/user name is incorrect..</h1>
-    		<span>Please double check user name & password.   </span><a href="/forgot"><span>Forgot password?</span></a>
-    	</div>
-    	<button id="login" class="login" onclick="window.location='/login'">Log In</button>
-    	
+  	<!-- Form Module-->
+  	<div class="form" id="loginId" ng-controller="loginCtrl">
+  		<section id="login" class="section">
+    		<div class="container">
+            	<div class="row" style="padding-top:40px;">
+                	<div class="col-sm-6 inner-right border-center" data-wow-delay=".3s" style="padding-right:160px;left:400px;">
+                		
+    					<h1> <b> Log in to Twitter </b> </h1>
+            	        <br>
+            	        <form name="loginform" novalidate>
+            	        	<div class="form-group" ng-class="{ 'has-error' : loginForm.name.$invalid && !loginForm.name.$pristine }">
+                            	<div class="controls">
+                            		<input type="text" name="emailId" class="form-control" ng-model="loginCredentials.emailId" ng-minlength="3" ng-maxlength="30" placeholder="Phone, email or username" required>
+                            	</div>
+                        	</div>
+                        	<br>
+                        	
+                        	<div class="form-group" ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
+                            	<div class="controls">
+                                	<input type="password" name="password" class="form-control" ng-model="loginCredentials.password" placeholder="Password (Required)" required>
+                            	</div>
+                        	</div>
+                        	<br>
+                        	
+                        	<div> 
+                        		<input type="checkbox"> <span> Remember me. <a href="/forgot"> Forgot password? </a> </span>
+                        	</div>
+                        	<br>
+  						
+                        	<button id="button" class="btn btn-primary" ng-click="submit()">Log in</button>
+                        	<br>
+                        	<br>
+                        	
+                        	<span> New to Twitter? <a href="/register">Sign up now</a></span>
+    					</form>
+    				</div>
+    			</div>
+    		</div>
+    	</section>
+    </div>
+    
+    	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+		<!-- minified AngularJS 1.3.0 -->
+		<script src="https://code.angularjs.org/1.3.0-rc.2/angular.min.js"></script>
+		<!-- angular route module -->
+		<script src="https://code.angularjs.org/1.3.0-rc.2/angular-route.min.js"></script>
+		<!-- angular resource module -->
+		<script src="https://code.angularjs.org/1.3.0-rc.2/angular-resource.min.js"></script>
+		<!-- my App -->
+  		<script src="/controllers/controller.js"></script>
+    
     </body>
 </html>

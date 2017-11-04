@@ -15,8 +15,9 @@ exports.login = function(req,res) {
 	});
 };
 
+
 exports.logout = function(req,res) {
-	ejs.renderFile('./views/login.ejs',{ title: 'Twitter' },function(err, result) {
+	ejs.renderFile('./views/logout.ejs',{ title: 'Twitter' },function(err, result) {
 		if (!err) {
 			// kill the session
 			req.session.destroy();
@@ -30,7 +31,7 @@ exports.logout = function(req,res) {
 
 exports.getFollowersCnt = function(req, res){
 	var urlParts = req.url.split("/");
-	var getFollowersCntQry = "SELECT COUNT(DISTINCT user_id) AS followerscnt from  test.follow_followers WHERE follower_ID='"+urlParts[2]+"'";
+	var getFollowersCntQry = "SELECT COUNT(DISTINCT user_id) AS followerscnt from  twitter.follow_followers WHERE follower_ID='"+urlParts[2]+"'";
 	mysql.fetchData(function(error, results) {
 		if(error) throw error;
 		else {
@@ -42,7 +43,7 @@ exports.getFollowersCnt = function(req, res){
 
 exports.getFollowingCnt = function(req, res){
 	var urlParts = req.url.split("/");
-	var getFollowingCntQry = "SELECT COUNT(DISTINCT follower_id) AS followingcnt from  test.follow_followers WHERE user_ID='"+urlParts[2]+"'";
+	var getFollowingCntQry = "SELECT COUNT(DISTINCT follower_id) AS followingcnt from  twitter.follow_followers WHERE user_ID='"+urlParts[2]+"'";
 	mysql.fetchData(function(error, results) {
 		if(error) throw error;
 		else { 
@@ -54,7 +55,7 @@ exports.getFollowingCnt = function(req, res){
 
 exports.getTweetsCnt = function(req, res){
 	var urlParts = req.url.split("/");
-	var gettweetCntQry = "SELECT COUNT(tweet_msg) AS tweetscnt from  test.tweet WHERE tweeted_by='"+urlParts[2]+"'";
+	var gettweetCntQry = "SELECT COUNT(tweet_msg) AS tweetscnt from  twitter.tweet WHERE tweeted_by='"+urlParts[2]+"'";
 	mysql.fetchData(function(error, results) {
 		if(error) throw error;
 		else { 
@@ -116,8 +117,8 @@ exports.returnLogin = function(req,res) {
 			if(error)
 				throw error;
 			else {
-				console.log("results[0]");
-				console.log(results[0]);
+				console.log("results");
+				console.log(results);
 				ejs.renderFile('./views/loginNew.ejs', { title: 'Twitter', user_ID: results[0].fullName, user_name: results[0].fullName}, function(err, result) {
 					if (!err)
 						res.end(result);
@@ -308,8 +309,8 @@ exports.getTweets = function(req, res){
 };
 
 exports.getFollowSuggestions = function(req, res){
-	var getFollowQry = "SELECT * FROM test.profiles WHERE profiles.user_id !='"+ req.session.userID +"' AND profiles.user_ID NOT IN " +
-						"((SELECT follow_followers.follower_id FROM test.follow_followers WHERE follow_followers.user_id = '" 
+	var getFollowQry = "SELECT * FROM twitter.register WHERE register.user_id !='"+ req.session.userID +"' AND register.user_ID NOT IN " +
+						"((SELECT follow_followers.follower_id FROM twitter.follow_followers WHERE follow_followers.user_id = '" 
 						+ req.session.userID 
 						+"')" 
 						 
