@@ -41,12 +41,14 @@ tweetApp.controller('tweetFormCtrl', ['$scope', '$http', 'tweetDataService', fun
         success(function(data) {
             console.log("posted successfully aaaaaaaaaaaa");
             console.log("bbbbbbbbbbbb");
+            console.log("pppppppppppppppppppppppppppppp");
         }).error(function(data) {
             console.error("error in posting");
         });
         $scope.tweetFormData = '';
         $http.get('/getTweets').
 		then(function(response) {
+			console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkk");
 			$scope.dataFromTweets = response.data;
 		});
     }          

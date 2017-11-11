@@ -119,7 +119,7 @@ exports.returnLogin = function(req,res) {
 			else {
 				console.log("results");
 				console.log(results);
-				ejs.renderFile('./views/loginNew.ejs', { title: 'Twitter', user_ID: results[0].fullName, user_name: results[0].fullName}, function(err, result) {
+				ejs.renderFile('./views/loginNew.ejs', { title: 'Twitter', user_ID: results[0].emailId, user_name: results[0].fullName}, function(err, result) {
 					if (!err)
 						res.end(result);
 					else
@@ -191,11 +191,11 @@ exports.viewProf = function(req,res) {
 	var getMyTweetsQry = "";
 	
 	if(urlParts.length == 2) {
-		getUserProfile = "select * from twitter.register where user_id='"+req.session.userID+"'";
-		getMyTweetsQry = "select * from twitter.tweet where tweeted_by='"+req.session.userID+"' order by tweet_id desc limit 10";
+		getUserProfile = "select * from twitter.register where emailId='"+req.session.emailId+"'";
+		getMyTweetsQry = "select * from twitter.tweet where tweeted_by='"+req.session.emailId+"' order by tweet_id desc limit 10";
 	}
 	else {
-		getUserProfile = "select * from twitter.register where user_id='"+urlParts[4]+"'";
+		getUserProfile = "select * from twitter.register where emailId='"+urlParts[2]+"'";
 		getMyTweetsQry = "select * from twitter.tweet where tweeted_by='"+urlParts[1]+"' order by tweet_id desc limit 10";
 	}
 	
@@ -207,10 +207,8 @@ exports.viewProf = function(req,res) {
 		else {
 			profileResults = results;
 			ejs.renderFile('./views/viewProf.ejs', { title: 'Twitter',
-				 user_name: profileResults[0]["user_name"],
-				 user_ID: profileResults[0].user_ID,
-				 mnth: monthNames[profileResults[0].mnth-1],
-				 year: profileResults[0].year},
+				 user_name: profileResults[0].fullName,
+				 emailId: profileResults[0].emailId},
 				 function(err, result) {
 					 // render on success
 					 if (!err) {
@@ -229,7 +227,7 @@ exports.viewProf = function(req,res) {
 
 exports.handleTweetForm = function(req,res){
 	var insertTweetMsg = "insert into twitter.tweet (tweeted_by, tweet_msg, tweet_date) values('"
-		+ req.session.userID
+		+ req.session.emailId
 		+ "','" 
 		+ req.body.tweetMsg
 		+ "'," 
