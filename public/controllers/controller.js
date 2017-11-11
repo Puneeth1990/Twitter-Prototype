@@ -39,7 +39,8 @@ tweetApp.controller('tweetFormCtrl', ['$scope', '$http', 'tweetDataService', fun
 	$scope.tweetSub = function() {
     	$http.post('/loginNew', $scope.tweetFormData).
         success(function(data) {
-            console.log("posted successfully");
+            console.log("posted successfully aaaaaaaaaaaa");
+            console.log("bbbbbbbbbbbb");
         }).error(function(data) {
             console.error("error in posting");
         });
@@ -64,7 +65,7 @@ tweetApp.controller('retweetFormCtrl', ['$scope', '$http', function($scope, $htt
         		$scope.retweetFormData.retweetMsg + " retweeted_by:" + $scope.retweetFormData.retweeted_by);
         $http.post('/postRetweet', $scope.retweetFormData).
         	  success(function(data) {
-        		  console.log("posted successfully");
+        		  console.log("posted successfully bbbbbbbbbbbbbbbbbb");
         	  }).error(function(data) {
         		  console.error("error in posting");
         	  });	
@@ -99,7 +100,7 @@ tweetApp.controller('editProfCtrl', ['$scope', '$http', function($scope, $http){
 								 "phneNum"   : $scope.phneNum,
 								 "userID"	 : $scope.userID}).
         success(function(data) {
-        	console.log("posted successfully");
+        	console.log("posted successfully cccccccccccccccccc");
         	$scope.btnStatus = data.statusMsg.message;
         }).error(function(data) {
             console.error("error in posting");
@@ -209,7 +210,7 @@ tweetApp.directive('followPanel', function($http){
 			scope.followBtn = function(){
 				$http.post('/postFollow', {user_id: scope.follow.user_ID}).
 		        success(function(data) {
-		            console.log("posted successfully");
+		            console.log("posted successfully ddddddddddddd");
 		        }).error(function(data) {
 		            console.error("error in posting");
 		        });

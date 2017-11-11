@@ -2,7 +2,6 @@
 /**
  * Module dependencies.
  */
-
 var express 	= require('express');
 var routes 		= require('./routes');
 var http 		= require('http');
@@ -11,6 +10,7 @@ var login 		= require('./routes/login');
 var register 	= require('./routes/register');
 var session 	= require('client-sessions');
 var bodyParser  = require('body-parser');
+var nodeMailer  = require('nodemailer');
 
 var app = express();
 
@@ -61,6 +61,32 @@ app.post('/postFollow', login.postFollow);
 app.post('/authenticate', login.authenticate);
 app.post('/editProf', login.editProf);
 app.post('/postRetweet', login.postRetweet);
+app.post('/send-email', function (req, res) {
+    let transporter = nodeMailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'puneethsrikanta@gmail.com',
+            pass: '9449622295'
+        }
+    });
+    let mailOptions = {
+        from: '"Puneeth Srikanta" <puneethsrikanta@gmail.com>', // sender address
+        to: req.body.to, // list of receivers
+        subject: req.body.subject, // Subject line
+        text: req.body.body, // plain text body
+        html: '<b>NodeJS Email Tutorial</b>' // html body
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message %s sent: %s', info.messageId, info.response);
+            res.render('index');
+        });
+    });
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

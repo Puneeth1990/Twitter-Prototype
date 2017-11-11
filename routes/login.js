@@ -55,7 +55,7 @@ exports.getFollowingCnt = function(req, res){
 
 exports.getTweetsCnt = function(req, res){
 	var urlParts = req.url.split("/");
-	var gettweetCntQry = "SELECT COUNT(tweet_msg) AS tweetscnt from  twitter.tweet WHERE tweeted_by='"+urlParts[2]+"'";
+	var gettweetCntQry = "SELECT COUNT(tweet_msg) AS tweetscnt from  twitter.tweet WHERE tweeted_by='"+urlParts[1]+"'";
 	mysql.fetchData(function(error, results) {
 		if(error) throw error;
 		else { 
@@ -191,12 +191,12 @@ exports.viewProf = function(req,res) {
 	var getMyTweetsQry = "";
 	
 	if(urlParts.length == 2) {
-		getUserProfile = "select * from twitter.register where emailId='"+req.session.emailId+"'";
+		getUserProfile = "select * from twitter.register where user_id='"+req.session.userID+"'";
 		getMyTweetsQry = "select * from twitter.tweet where tweeted_by='"+req.session.userID+"' order by tweet_id desc limit 10";
 	}
 	else {
-		getUserProfile = "select * from twitter.register where emailId='"+urlParts[2]+"'";
-		getMyTweetsQry = "select * from twitter.tweet where tweeted_by='"+urlParts[2]+"' order by tweet_id desc limit 10";
+		getUserProfile = "select * from twitter.register where user_id='"+urlParts[4]+"'";
+		getMyTweetsQry = "select * from twitter.tweet where tweeted_by='"+urlParts[1]+"' order by tweet_id desc limit 10";
 	}
 	
 	var profileResults;
@@ -240,7 +240,7 @@ exports.handleTweetForm = function(req,res){
 		if(error)
 			throw error;
 		else{
-			ejs.renderFile('./views/loginNew.ejs', { title: 'Twitter', user_name: req.session.user_name, user_ID: req.session.user_ID }, function(err, result) {
+			ejs.renderFile('./views/loginNew.ejs', { title: 'Twitter', user_name: req.session.fullName, user_ID: req.session.user_id }, function(err, result) {
 				// render on success
 				if (!err) {
 					res.end();
@@ -273,7 +273,7 @@ exports.postRetweet = function(req, res){
 		if(error)
 			throw error;
 		else{
-			ejs.renderFile('./views/loginNew.ejs', { title: 'Twitter', user_name: req.session.user_name, user_ID: req.session.user_ID }, function(err, result) {
+			ejs.renderFile('./views/loginNew.ejs', { title: 'Twitter', user_name: req.session.fullName, user_ID: req.session.user_id }, function(err, result) {
 				// render on success
 				if (!err) {
 					res.end();
@@ -292,10 +292,10 @@ exports.getTweets = function(req, res){
 	var getTweetsQry = "";
 	var urlParts = req.url.split("/");
 	if(urlParts.length == 2)
-		getTweetsQry = "SELECT * FROM twitter.tweet WHERE tweeted_by IN ( SELECT follower_id from twitter.tweetfollowers WHERE user_id = '"+
+		getTweetsQry = "SELECT * FROM twitter.tweet WHERE tweeted_by IN ( SELECT follower_id from twitter.follow_followers WHERE user_id = '"+
 		req.session.userID+"') ORDER BY tweet_date DESC, tweet_id DESC";
 	else
-		getTweetsQry = "select * from twitter.tweet where tweeted_by='"+urlParts[2]+"' order by tweet_id desc limit 10";
+		getTweetsQry = "select * from twitter.tweet where tweeted_by='"+urlParts[1]+"' order by tweet_id desc limit 10";
 	mysql.fetchData(function(error, results) {
 		if(error) {
 			throw error;
@@ -309,7 +309,7 @@ exports.getTweets = function(req, res){
 };
 
 exports.getFollowSuggestions = function(req, res){
-	var getFollowQry = "SELECT * FROM twitter.register WHERE register.user_id !='"+ req.session.userID +"' AND register.user_ID NOT IN " +
+	var getFollowQry = "SELECT * FROM twitter.register WHERE register.user_id !='"+ req.session.userID +"' AND register.user_id NOT IN " +
 						"((SELECT follow_followers.follower_id FROM twitter.follow_followers WHERE follow_followers.user_id = '" 
 						+ req.session.userID 
 						+"')" 
@@ -343,7 +343,7 @@ exports.postFollow = function(req, res){
 };
 
 exports.getUserDetails = function(req, res){
-	var getUserDetailsQry = "SELECT user_name, email_id, phone_num FROM test.profiles WHERE user_ID = '"+req.session.userID+"';"
+	var getUserDetailsQry = "SELECT fullName, emailId FROM twitter.register WHERE user_id = '"+req.session.userID+"';"
 	mysql.fetchData(function(error, results) {
 		if(error) throw error;
 		else {
@@ -357,15 +357,13 @@ exports.getUserDetails = function(req, res){
 
 
 exports.editProf = function(req, res){
-	var editProfQry = "UPDATE twitter.twitterprototype SET "
-					  + "user_name = '"
+	var editProfQry = "UPDATE twitter.register SET "
+					  + "fullName = '"
 					  + req.param('fullName')
-					  + "', email_id = '"
+					  + "', emailId = '"
 					  + req.param('emailId')
-					  + "', phone_num = '"
-					  + req.param('phoneNum')
-					  + "' WHERE user_ID = '"
-					  + req.param('userID')
+					  + "' WHERE user_id = '"
+					  + req.param('user_id')
 					  + "';"	 
 	mysql.fetchData(function(error, results) {
 		if(error) throw error;

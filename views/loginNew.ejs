@@ -7,10 +7,8 @@
 	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link href="css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
-	<!-- Material icons CSS toolkit -->
-	<link rel="stylesheet" href="css/material-icons.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="app/bootstrap.js"></script>
@@ -45,33 +43,6 @@
     		padding: 8px 32px 8px 12px;
     		transition: all .2s ease-in-out;
     		width: 100%;
-    	}
-    	
-    	.EdgeButton--primary, .EdgeButton--primary:focus 
-    	{
-    		background-color: #4AB3F4;
-    		border-color: transparent;
-		}
-		
-		.EdgeButton--primary 
-		{
-    		background-color: #1da1f2;
-    		border: 1px solid #1da1f2;
-    		color: #ffff;
-    	}
-    
-	    .EdgeButton, .EdgeButton:visited 
-	    {
-    		border-radius: 100px;
-    		box-shadow: none;
-    		cursor: pointer;
-    		font-size: 14px;
-    		font-weight: bold;
-    		line-height: 20px;
-    		padding: 6px 16px;
-    		position: relative;
-    		text-align: center;
-    		white-space: nowrap;
     	}
     	
     	.profileHome
@@ -305,7 +276,7 @@
 		.trend 
 		{
   			text-align: left;
-  			background-color: #F8F8F8;
+  			background-color: #FFFFFF;
   			position: absolute;
   			left: 200px;
   			top: 370px;
@@ -449,6 +420,33 @@
 		
 		}
 		
+		.EdgeButton--primary, .EdgeButton--primary:focus 
+    	{
+    		background-color: #4AB3F4;
+    		border-color: transparent;
+		}
+		
+		.EdgeButton--primary 
+		{
+    		background-color: #1da1f2;
+    		border: 1px solid #1da1f2;
+    		color: #ffff;
+    	}
+    
+	    .EdgeButton, .EdgeButton:visited 
+	    {
+    		border-radius: 100px;
+    		box-shadow: none;
+    		cursor: pointer;
+    		font-size: 14px;
+    		font-weight: bold;
+    		line-height: 20px;
+    		padding: 6px 16px;
+    		position: relative;
+    		text-align: center;
+    		white-space: nowrap;
+    	}
+    	
   	</style>
   	
 </head>
@@ -468,7 +466,7 @@
 	                <li><a href="/home" class="active navbar-custom" style="padding-left:70px;"><span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 13px;"></span> <b> Home </b></a></li>
                 	<li><a href="#" class="navbar-custom"><span class="glyphicon glyphicon-flash" aria-hidden="true" style="font-size: 13px;"></span> <b>Moments</b></a></li>
                 	<li><a href="#" class="navbar-custom"><span class="glyphicon glyphicon-bell" aria-hidden="true" style="font-size: 13px;"></span> <b>Notifications</b></a></li>
-                	<li><a href="#" class="navbar-custom"><span class="glyphicon glyphicon-envelope" aria-hidden="true" style="font-size: 13px;" data-toggle="modal" data-target="#directMessagesModal"></span><b> Messages</b></a></li>
+                	<li><a href="#" class="navbar-custom" data-toggle="modal" data-target="#directMessagesModal"><span class="glyphicon glyphicon-envelope" aria-hidden="true" style="font-size: 13px;"></span><b> Messages</b></a></li>
                 </ul>
             </div>
 
@@ -477,9 +475,11 @@
 			</div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                		<li style="left:70px;"><input class="search-input" type="text" id="search-query" placeholder="Search Twitter" name="q" autocomplete="off" spellcheck="false" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-dropdown-1" style="width:240px;"></li>
+                		<li style="left:70px;top:-10px;">
+                			<input class="search-input" type="text" id="search-query" placeholder="Search Twitter" name="q" autocomplete="off" spellcheck="false" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-dropdown-1" style="width:240px;">
+                		</li>
                     	<ul class="nav navbar-nav">
-                    		<li class="dropdown" style="bottom:15px;right:70px;"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="height:20px;"><img src="/images/default.png" class="nav-profile-img" alt="profile" style="height:40px;padding-left:150px;margin-left:0px;" title="Profile and Settings"></a> <span class="caret"></span></a>
+                    		<li class="dropdown" style="bottom:15px;right:70px;"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="height:20px;bottom:15px;"><img src="/images/default.png" class="nav-profile-img" alt="profile" style="height:40px;padding-left:150px;margin-left:0px;" title="Profile and Settings"></a></a>
         						<ul class="dropdown-menu" style="top:64px;width:240px;">
           							<li>
 										<a href="/viewProf" class="profile-drop-down">
@@ -503,7 +503,7 @@
         						</ul>
       						</li>
         					<li style="right:110px;">
-        						<button id="global-new-tweet-button" ng-click="tweetSub()" class="js-global-new-tweet js-tooltip EdgeButton EdgeButton--primary js-dynamic-tooltip" data-placement="bottom" data-component-context="new_tweet_button" data-original-title="" data-toggle="modal" data-target="#myModal" style="margin-left:50px;">
+        						<button id="global-new-tweet-button" class="js-global-new-tweet js-tooltip EdgeButton EdgeButton--primary js-dynamic-tooltip" data-placement="bottom" data-component-context="new_tweet_button" data-original-title="" data-toggle="modal" data-target="#myModal" style="margin-left:50px;bottom:10px;">
 				            		<span class="text" style="color:white;">Tweet</span>
         						</button>
         					</li>
@@ -512,95 +512,59 @@
         		</div>
     		</nav>
     <!--navbar ends here-->
-      			
-      <!-- The Tweet Modal -->
-	  <div class="modal" id="myModal" role="dialog">
-    	<div class="modal-dialog">
-	      <!-- Modal content-->
-      		<div class="modal-content">
-        		<div class="modal-header">
-          			<button type="button" class="close" data-dismiss="modal">&times;</button>
-          			<h4 class="modal-title"><b>Compose new Tweet </b></h4>
-        		</div>
-        		<div class="modal-body">
-          			<textarea class="form-control" rows="5" id="comment" placeholder="What's happening?></textarea>
-        		</div>
-        		<div class="modal-footer">
-          			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        		</div>
-      		</div>
-    	</div>
-  	</div>
-  	
-  	
+    
+
+	 <!-- DirectMessagesModal -->
+  <div class="modal fade" id="directMessagesModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="width:700px;height:600px;">
+        <div class="modal-header" style="height:100px;">
+          <button type="button" class="close" data-dismiss="modal" style="margin-top: 20px;color:#808080;">&times;</button>
+          <h3 class="modal-title" style="margin-top: 20px;"> <b> Direct Messages </b></h3>
+          <button type="button" class="DMInbox-toolbar DMComposeButton EdgeButton EdgeButton--small EdgeButton--primary dm-new-button js-initial-focus" style="bottom:35px;left:520px;margin-top: 0px;">
+      		<span>New Message</span>
+    	  </button>
+        </div>
+        <div class="modal-body" style="height:184px;">
+        </div>
+   	  </div>
+    </div>
+  </div>
+    
+    <!-- TweetModal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="width:700px;height:250px;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" style="margin-top: 0px;">&times;</button>
+          <h3 class="modal-title"> <b>Compose new Tweet </b></h3>
+        </div>
+        <div class="modal-body" style="background-color:#1DA1F2; background: rgba(29,161,242,0.1);height:184px;">
+        	<div ng-controller="tweetFormCtrl">
+					<form class="tweet_area_form" style="left:20px;">
+						<textarea class="tweet_area_textarea" ng-model="tweetFormData.tweetMsg" placeholder="What's happening?" style="width:660px;color:#aab8c2;border:2px solid #b3e7ff;margin-top:0px;"></textarea>
+						<br>
+						<div id="leftside">
+							<i class="fa fa-file-photo-o" style="font-size:35px;color:#b3e7ff" title="Add photos or video"></i>
+							<i class="material-icons" title="Add GIF"></i>
+							<i class="material-icons" style="font-size:35px;color:#b3e7ff" title="Add poll"></i>
+							<i class="material-icons" style="font-size:35px;color:#b3e7ff" title="Location search"></i>
+							<button id="global-new-tweet-button" class="js-global-new-tweet js-tooltip EdgeButton EdgeButton--primary js-dynamic-tooltip" rows="3" ng-click="tweetSub()" data-placement="bottom" data-component-context="new_tweet_button" data-original-title="" data-toggle="modal" data-target="#myModal" style="left:540px;bottom:10px;">
+				            	<span style="color:white;" ng-class="{'disabled':showDisabled}">Tweet</span>
+        					</button>
+        				</div>
+					</form>
+				</div>
+        </div>
+   	  </div>
+    </div>
+  </div>
   
-  							</div>
-  	
-  							<!-- The Tweet Modal -->
-							<div id="tweetModal" class="modal">
-  								<!-- Modal content -->
-  								<div class="modal-content">
-    								
-    								<div class="tweet_area">
-										<span class="close">x</span>
-										<div class="tweet_area_pic">
-											<a href="#"><img alt="profile_pic" src="/images/default.png" height="60px" width="60px" style="border-radius: 4px"></a>
-										</div>
-										<div ng-controller="tweetFormCtrl">
-											<form class="tweet_area_form">
-												<textarea class="tweet_area_textarea" ng-model="tweetFormData.tweetMsg" placeholder="What's happening?"></textarea>
-												<br>
-												<button id="button" ng-click="tweetSub()" class="button">
-				            						<span class="text" style="color:white;">Tweet</span>
-        										</button>
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>
-							</div>
-						</li>
-      				</ul>
-      			</div>
-      		</div><!-- /.navbar-collapse --> 
-  		</div><!-- /.container-fluid -->
-  		<script>
-			// Get the modal
-			var modal 	 = document.getElementsByClassName('modal')[0];
-						
-			console.log(modal);
-			// Get the button that opens the modaldiv
-			var btn = document.getElementById("tweetBtn");
-			
-			// Get the <span> element that closes the modal
-			var span    = document.getElementsByClassName("close")[0];
-						
-			// Get the tweet button element
-			var tweet = document.getElementsByClassName("tweet_area_button")[0];
-						
-			// When the user clicks the button, open the modal
-			btn.onclick = function() {
-    			modal.style.display = "block";
-			}
-			
-			// When the user clicks on <span> (x), close the modal
-			span.onclick = function() {
-				modal.style.display = "none";
-			}
-			
-			// When the user clicks on tweet button, close the modal
-			tweet.onclick = function() {
-				modal.style.display = "none";
-			}
-						
-			// When the user clicks anywhere outside of the modal, close it
-			window.onclick = function(event) {
-				if (event.target == modal) {
-        			modal.style.display = "none";
-    			}
-			}
-		</script>
-	</nav>
+      			
 	<div class="container-fluid">
 	<header>
         <% include ./partials/header %>
@@ -635,7 +599,7 @@
 	
 		<!-- trending div -->
 		<div id="trend" class="trend" style="color:black;left:100px;top:340px;width:300px;">
-			<h4><b>Current trends.</b> <a href=""> <small> Change </small></a></h4>
+			<h4><b>Current trends.</b> <a href=""> Change </a></h4>
 		</div>
 	
 		<!-- main div -->
@@ -646,14 +610,15 @@
 				</div>
 				<div ng-controller="tweetFormCtrl">
 					<form class="tweet_area_form">
-						<textarea class="tweet_area_textarea" ng-model="tweetFormData.tweetMsg" placeholder="What's happening?" style="width:480px;color:#aab8c2;border:2px solid #b3e7ff;margin-top:10px;"></textarea>
+						<textarea class="tweet_area_textarea" ng-model="tweetFormData.tweetMsg" placeholder="What's happening?" style="width:480px;color:#aab8c2;border:2px solid #b3e7ff;margin-top:10px;">
+						</textarea>
 						<br>
 						<div id="leftside">
 							<i class="fa fa-file-photo-o" style="font-size:35px;color:#b3e7ff" title="Add photos or video"></i>
 							<i class="material-icons" title="Add GIF"></i>
 							<i class="material-icons" style="font-size:35px;color:#b3e7ff" title="Add poll"></i>
 							<i class="material-icons" style="font-size:35px;color:#b3e7ff" title="Location search"></i>
-							<button id="global-new-tweet-button" class="js-global-new-tweet js-tooltip EdgeButton EdgeButton--primary js-dynamic-tooltip" rows="3" ng-click="tweetSub()" data-placement="bottom" data-component-context="new_tweet_button" data-original-title="" data-toggle="modal" data-target="#myModal" style="left:360px;bottom:10px;">
+							<button id="global-new-tweet-button" class="js-global-new-tweet js-tooltip EdgeButton EdgeButton--primary js-dynamic-tooltip" rows="3" ng-click="tweetSub()" data-placement="bottom" data-component-context="new_tweet_button" data-original-title="" style="left:360px;bottom:10px;">
 				            	<span class="text" style="color:white;">Tweet</span>
         					</button>
         				</div>

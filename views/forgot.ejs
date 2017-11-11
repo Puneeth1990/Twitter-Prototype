@@ -57,15 +57,16 @@
     </nav>
     <!--navbar ends here-->
     
+    <form action="/send-email" method="post" novalidate>
      <h2 style="color:#777;padding-left:430px;margin-top:60px;"> Find your Twitter account </h2>
     <br>
     <br>
     <p style="padding-left:430px;font-size: 14px;line-height: 8px;"> Enter your email, phone number, or username. </p>
     <br>
-    <input type="emailId" class="form-control" id="emailId" style="margin-left:430px;width:320px;">
+    <input type="emailId" class="form-control" name="to" id="emailId" style="margin-left:430px;width:320px;">
   	<br>
-  	<form class="Form" action="" method="post" novalidate>
-        <button type="button" class="btn btn-primary" style="margin-left:430px;" ng-click="forgotPassword()">Search</button>
+     	<button type="button" class="btn btn-primary" style="margin-left:430px;">Search</button>
+        <span id="message"></span>
     </form>
 </body>
 </html>
